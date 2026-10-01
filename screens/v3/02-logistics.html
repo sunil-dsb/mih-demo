@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" class="static"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>02-logistics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    /* Reset & Base Settings */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: #e5e5e5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    /* Colors derived from screenshots */
+    :root {
+      --bg-color: #fafbfa;
+      --text-dark: #001229;
+      --text-muted: #6b7280;
+      --primary-blue: #022e5f;
+      --border-color: #e5e7eb;
+      --input-bg: #ffffff;
+      --seg-bg: #f3f4f6;
+    }
+
+    /* Phone Container */
+    .phone {
+      width: 390px;
+      height: 844px;
+      background-color: var(--bg-color);
+      border-radius: 40px;
+      border: 12px solid #000;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px 20px 15px; /* space for notch */
+      background-color: var(--bg-color);
+      position: relative;
+      z-index: 10;
+    }
+    .header-btn {
+      background: none; border: none; font-size: 20px;
+      color: var(--text-dark); cursor: pointer;
+      width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
+    }
+    .header-title {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-dark);
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      padding: 0 20px;
+      margin-top: 5px;
+    }
+    .progress-bars {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .progress-segment {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background-color: var(--border-color);
+      transition: background-color 0.3s;
+    }
+    .progress-segment.active {
+      background-color: var(--primary-blue);
+    }
+    .progress-text {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--primary-blue);
+    }
+
+    /* Content Area */
+    .content {
+      flex: 1;
+      padding: 24px 20px;
+      overflow-y: auto;
+    }
+    .screen { display: none; }
+    .screen.active { display: block; animation: fadeIn 0.3s ease; }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--text-dark);
+      margin-bottom: 4px;
+      letter-spacing: -0.5px;
+    }
+    .subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    /* Forms */
+    .form-group { margin-bottom: 20px; }
+    .label {
+      display: block; font-size: 14px; font-weight: 500;
+      color: var(--text-dark); margin-bottom: 8px;
+    }
+    .input-box {
+      width: 100%; background: var(--input-bg);
+      border: 1px solid var(--border-color); border-radius: 14px;
+      padding: 16px; font-size: 15px; color: var(--text-dark);
+      outline: none; font-family: inherit;
+    }
+    .input-box::placeholder { color: #9ca3af; }
+    
+    .select-wrap { position: relative; }
+    .select-wrap::after {
+      content: "⌄"; position: absolute; right: 16px; top: 12px;
+      font-size: 20px; color: var(--text-muted); pointer-events: none;
+    }
+    .select-box {
+      appearance: none; -webkit-appearance: none;
+      width: 100%; background: var(--input-bg);
+      border: 1px solid var(--border-color); border-radius: 14px;
+      padding: 16px; font-size: 15px; color: var(--text-dark); outline: none;
+    }
+
+    .textarea-wrap { position: relative; }
+    textarea.input-box { height: 120px; resize: none; }
+    .mic-icon {
+      position: absolute; right: 16px; top: 16px;
+      width: 16px; height: 16px; opacity: 0.5;
+    }
+
+    /* Segmented Controls */
+    .segmented-control {
+      display: flex; background-color: var(--seg-bg);
+      border-radius: 12px; padding: 4px; border: 1px solid var(--border-color);
+    }
+    .seg-btn {
+      flex: 1; padding: 10px 0; text-align: center;
+      font-size: 13px; font-weight: 500; color: var(--text-muted);
+      border-radius: 8px; border: none; background: transparent; cursor: pointer; transition: all 0.2s;
+    }
+    .seg-btn.active {
+      background-color: #fff; color: var(--primary-blue);
+      font-weight: 600; box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    /* Media Buttons */
+    .media-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      width: 100%; background: var(--input-bg);
+      border: 1px solid var(--border-color); border-radius: 12px;
+      padding: 16px; margin-bottom: 12px; cursor: pointer;
+    }
+    .media-btn-left {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 14px; font-weight: 600; color: var(--text-dark);
+    }
+    .media-btn-icon { opacity: 0.6; }
+    .media-btn-plus { color: var(--text-muted); font-size: 20px; font-weight: 300; }
+    .optional-label { font-size: 14px; font-weight: 600; color: var(--text-dark); margin: 20px 0 12px; }
+
+    /* Bottom Button Area */
+    .bottom-bar {
+      padding: 16px 20px 34px; /* space for home indicator */
+      background: var(--bg-color);
+    }
+    .primary-btn {
+      width: 100%; background-color: var(--primary-blue); color: #fff;
+      border: none; border-radius: 24px; padding: 16px;
+      font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;
+    }
+    .secondary-btn {
+      width: 100%; background-color: #fff; color: var(--text-dark);
+      border: 1px solid var(--border-color); border-radius: 24px; padding: 16px;
+      font-size: 16px; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer;
+    }
+
+    /* Bottom Sheet Modal Overlay */
+    .modal-overlay {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4); z-index: 100;
+      display: none; flex-direction: column; justify-content: flex-end;
+    }
+    .modal-overlay.active { display: flex; animation: fadeInModal 0.3s ease; }
+    @keyframes fadeInModal { from { opacity: 0; } to { opacity: 1; } }
+    
+    .modal-content {
+      background: #fff; border-top-left-radius: 24px; border-top-right-radius: 24px;
+      padding: 24px 20px 40px; transform: translateY(100%); animation: slideUp 0.3s forwards;
+    }
+    @keyframes slideUp { to { transform: translateY(0); } }
+    
+    .modal-header-row { display: flex; gap: 16px; margin-bottom: 24px; }
+    .spinner-icon {
+      width: 32px; height: 32px; border-radius: 16px;
+      border: 3px solid #e0e7ff; border-top-color: #3b82f6; animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .modal-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 4px; }
+    .modal-subtitle { font-size: 14px; color: var(--text-muted); line-height: 1.4; }
+
+    .grid-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 20px; }
+    .grid-item { background: #fff; border: 1px solid var(--border-color); border-radius: 12px; padding: 12px; }
+    .grid-label { font-size: 10px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+    .grid-value { font-size: 15px; font-weight: 600; color: var(--text-dark); }
+
+    /* Centered Modal Overlay (for calculation) */
+    .center-modal-overlay {
+      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.6); z-index: 300;
+      display: none; flex-direction: column; justify-content: center; align-items: center; padding: 20px;
+    }
+    .center-modal-overlay.active { display: flex; animation: fadeInModal 0.3s ease; }
+    .center-modal-content {
+      background: #fff; border-radius: 24px; padding: 32px 24px;
+      width: 100%; text-align: center;
+    }
+    .calc-spinner {
+      width: 64px; height: 64px; border-radius: 32px; background: #eef2ff;
+      display: inline-flex; align-items: center; justify-content: center; margin-bottom: 24px;
+    }
+    .calc-spinner-inner {
+      width: 24px; height: 24px; border: 3px solid #c7d2fe; border-top-color: var(--primary-blue);
+      border-radius: 12px; animation: spin 1s linear infinite;
+    }
+    .calc-title { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 12px; letter-spacing: -0.5px; }
+    .calc-subtitle { font-size: 14px; color: var(--text-muted); line-height: 1.5; margin-bottom: 24px; }
+    .calc-progress-bg { width: 100%; height: 6px; background: #e0e7ff; border-radius: 3px; overflow: hidden; }
+    .calc-progress-fill { width: 70%; height: 100%; background: var(--primary-blue); border-radius: 3px; }
+
+    /* Project Analysis Screen */
+    #analysisScreen {
+      display: none; height: 100%; background: var(--bg-color); position: absolute; top: 0; left: 0; width: 100%; z-index: 200; flex-direction: column;
+    }
+    .analysis-header {
+      display: flex; align-items: center; justify-content: center;
+      position: relative; padding: 50px 20px 15px; background: var(--bg-color);
+    }
+    .analysis-close { position: absolute; left: 20px; top: 50px; background: none; border: none; width: 30px; height: 30px; font-size: 20px; cursor: pointer; color: var(--text-dark); display: flex; align-items: center; justify-content: center; }
+    .analysis-title { font-size: 16px; font-weight: 600; color: var(--text-dark); }
+    
+    .analysis-progress-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 10px 20px; background: var(--bg-color);
+    }
+    .analysis-q-text { font-size: 11px; font-weight: 700; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+    .analysis-pct { font-size: 11px; font-weight: 700; color: var(--primary-blue); background: #e0e7ff; padding: 4px 8px; border-radius: 6px; }
+    .analysis-bar-bg { margin: 0 20px; height: 4px; background: var(--border-color); border-radius: 2px; }
+    .analysis-bar-fill { height: 100%; width: 100%; background: var(--primary-blue); border-radius: 2px; }
+
+    .question-text { font-size: 18px; font-weight: 700; color: var(--text-dark); margin: 24px 20px; line-height: 1.4; }
+    .options-list { padding: 0 20px; display: flex; flex-direction: column; gap: 12px; overflow-y: auto; flex: 1; padding-bottom: 100px; }
+    .option-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px; border: 1px solid var(--border-color); border-radius: 14px; background: #fff; cursor: pointer;
+    }
+    .option-radio { width: 20px; height: 20px; border-radius: 10px; border: 2px solid #9ca3af; }
+    .option-text { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+
+    .analysis-bottom {
+      display: flex; gap: 12px; padding: 16px 20px 34px; background: var(--bg-color);
+      position: absolute; bottom: 0; left: 0; right: 0;
+    }
+    .btn-cancel { flex: 1; padding: 16px; border-radius: 24px; border: 1px solid var(--border-color); background: transparent; font-size: 15px; font-weight: 500; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    .btn-next { flex: 1; padding: 16px; border-radius: 24px; border: none; background: var(--primary-blue); font-size: 15px; font-weight: 500; color: #fff; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 8px; }
+    
+    /* Estimated Quote Screen */
+    #quoteScreen {
+      display: none; height: 100%; background: var(--bg-color); position: absolute; top: 0; left: 0; width: 100%; z-index: 400; flex-direction: column;
+    }
+    .quote-content { flex: 1; overflow-y: auto; padding: 16px 20px; }
+    
+    .quote-top-card {
+      background: #fff; border: 1px solid var(--border-color); border-radius: 24px;
+      padding: 24px; text-align: center; margin-bottom: 16px;
+    }
+    .quote-top-subtitle { font-size: 14px; font-weight: 600; color: var(--primary-blue); margin-bottom: 8px; }
+    .quote-price { font-size: 40px; font-weight: 700; color: var(--text-dark); margin-bottom: 8px; letter-spacing: -1px; }
+    .quote-top-desc { font-size: 12px; color: var(--text-muted); }
+
+    .breakdown-card {
+      background: #fff; border: 1px solid var(--border-color); border-radius: 24px;
+      padding: 24px; margin-bottom: 24px;
+    }
+    .breakdown-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .breakdown-title { font-size: 16px; font-weight: 700; color: var(--text-dark); }
+    .edit-btn { background: #f1f5f9; color: var(--primary-blue); font-size: 12px; font-weight: 600; padding: 6px 12px; border-radius: 8px; border: none; display: flex; align-items: center; gap: 4px; }
+    
+    .breakdown-row { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+    .breakdown-label { font-size: 14px; font-weight: 600; color: var(--text-dark); }
+    .breakdown-sublabel { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .breakdown-value { font-size: 14px; font-weight: 700; color: var(--text-dark); display: flex; align-items: center; gap: 4px; }
+    .breakdown-value.chevron::after { content: "›"; color: var(--text-muted); font-size: 16px; font-weight: 400; }
+    
+    .project-breakdown-btn {
+      background: #f8fafc; border-radius: 12px; padding: 16px;
+      display: flex; align-items: center; justify-content: space-between; margin-top: 24px;
+    }
+    .pb-left { display: flex; align-items: center; gap: 12px; font-size: 14px; font-weight: 700; color: var(--text-dark); }
+    .pb-icon { width: 24px; height: 24px; border-radius: 12px; background: #e2e8f0; display: flex; align-items: center; justify-content: center; font-size: 12px; color: var(--text-muted); }
+    
+    .quote-bottom { padding: 16px 20px 34px; display: flex; flex-direction: column; gap: 12px; background: var(--bg-color); }
+
+  
+    /* board embed: the device frame comes from the board, so the prototype's own phone shell is removed */
+    html,body{height:100%;overflow:hidden;scrollbar-width:none}
+    body{display:block;min-height:0;background:var(--bg-color)}
+    .phone{width:100%;height:100%;border:0;border-radius:0;box-shadow:none}
+    .content{scrollbar-width:none}.content::-webkit-scrollbar{display:none}
+    .static *{animation:none!important;transition:none!important}
+    .static .modal-content{transform:none}
+    /* the prototype left the button floating under the fields; in the real app it sits at the bottom of the screen */
+    #mainFlow{display:flex;flex-direction:column;height:100%}
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  
+  <!-- Flow Container (Screens 1-3) -->
+  <!-- Represents: screens/CreateEstimateCapture.tsx -->
+  <div id="mainFlow">
+    <div class="header">
+      <button class="header-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"></path></svg>
+      </button>
+      <div class="header-title">Create Estimate</div>
+      <div style="width:24px"></div>
+    </div>
+    
+    <div class="progress-container">
+      <div class="progress-bars">
+        <div class="progress-segment active" id="p1"></div>
+        <div class="progress-segment active" id="p2"></div>
+        <div class="progress-segment" id="p3"></div>
+      </div>
+      <div class="progress-text" id="stepText">Step 2 of 3</div>
+    </div>
+
+    <div class="content">
+      <!-- Capture Step 1 -->
+      
+
+      <!-- Capture Step 2 -->
+      <div class="screen active" id="step2">
+        <h1>Logistics</h1>
+        <div class="subtitle">Set materials, timing, and jobsite location.</div>
+        
+        <div class="form-group">
+          <label class="label">Who supplies materials?</label>
+          <div class="segmented-control">
+            <button class="seg-btn active">I'll Supply</button>
+            <button class="seg-btn">Customer Supplies</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Urgency</label>
+          <div class="segmented-control">
+            <button class="seg-btn active">Standard</button>
+            <button class="seg-btn">Urgent</button>
+            <button class="seg-btn">Emergency</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="label">Jobsite ZIP Code (Optional)</label>
+          <input type="text" class="input-box" placeholder="e.g. 78704">
+        </div>
+      </div>
+
+      <!-- Capture Step 3 -->
+      
+    </div>
+
+    <div class="bottom-bar">
+      <button class="primary-btn" id="continueBtn">Continue <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></button>
+    </div>
+  </div>
+
+  <!-- Represents: the logic within CreateEstimate.tsx triggering 'useGenerateQuestions' -->
+  <!-- Loading Modal (Bottom Sheet) -->
+  
+
+  <!-- Represents: modal rendered over Capture step when questions are ready -->
+  <!-- Project Analysis Screen -->
+  
+
+  <!-- Represents: the logic within CreateEstimate.tsx triggering 'useGenerateQuote' -->
+  <!-- Centered Calculating Modal -->
+  
+
+  <!-- Represents: screens/CreateEstimateQuote.tsx -->
+  <!-- Estimated Quote Screen -->
+  
+
+</div>
+
+
+
+
+
+</body></html>

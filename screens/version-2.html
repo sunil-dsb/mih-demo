@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIH Pros · Version 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="device.css">
+<style>
+/* board around the phones (not part of the app) */
+.vnav{display:flex;gap:8px;flex-wrap:wrap}.vnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #6F7582;background:#fff;color:#14213D;font-weight:600;text-decoration:none}.vnav a[aria-current=page]{background:#14213D;border-color:#14213D;color:#fff}
+/* the concept screens were drawn at 390 x 844, so this board's phone is that size inside its bezel (9px each side) */
+:root{--device-w:408px;--device-h:862px}
+body{margin:0;background:#F6F7F9;font-family:Inter,system-ui,sans-serif;color:#151923}
+.board-head{max-width:1900px;margin:0 auto;padding:36px 32px 0;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.board-head h1{font-size:26px;line-height:1.2;margin:0;color:#14213D}
+.group{max-width:1900px;margin:0 auto;padding:24px 24px 0}
+.group h2{font-size:20px;line-height:1.3;margin:0 0 0 8px;color:#14213D}
+.group:last-of-type{padding-bottom:80px}
+.screen{background:#fff}
+.screen iframe{display:block;width:100%;height:100%;border:0}
+.sb-over{position:absolute;top:0;left:0;right:0;height:50px;padding:0 30px 6px;z-index:5;pointer-events:none}
+@media (max-width:480px){.group{padding:16px 0 0}.board-head{padding:24px 16px 0}}
+/* board mobile */
+@media (max-width:480px){.board-head{padding:20px 16px 0;gap:12px}.board-head h1{font-size:20px}.group{padding:16px 0 0}.group h2{margin-left:16px}main.screens-row{padding:8px 0 48px}}
+</style>
+</head>
+<body>
+<header class="board-head">
+ <h1>Version 2 · Client concept</h1>
+ <nav class="vnav" aria-label="Versions"><a href="version-1.html">Version 1</a><a href="version-2.html" aria-current="page">Version 2</a><a href="version-3.html">Version 3</a><a href="version-4.html">Version 4</a></nav>
+</header>
+
+<section class="group"><h2>Customer · New quote</h2>
+<div class="screens-row">
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/01-who-are-you.html" title="1 · Who are you?" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#14213D" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/02-customer-home.html" title="2 · Customer home (Richard's sketch)" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#14213D" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/03-show-us.html" title="3 · Show us" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/04-ai-fills-title-trade.html" title="4 · AI fills title + trade" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/05-where.html" title="5 · Where" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/06-how-soon.html" title="6 · How soon" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/07-materials.html" title="7 · Materials" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/08-ai-questions.html" title="8 · AI questions (one per screen)" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/09-building-estimate.html" title="9 · Building estimate" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/10-customer-estimate.html" title="10 · Customer estimate" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+</div></section>
+
+<section class="group"><h2>Service pro</h2>
+<div class="screens-row">
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/11-pro-new-job-request.html" title="Pro · New job request" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/12-pro-full-breakdown.html" title="Pro · Full breakdown" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/13-pro-applied.html" title="Pro · You applied" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+<div class="screen-slot"><div class="phone"><span class="island"></span><div class="screen"><iframe src="v2/14-pro-finish-the-job.html" title="Pro · Finish the job" scrolling="no"></iframe><div class="statusbar sb-over" style="color:#FFFFFF" aria-hidden="true"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div></div></div></div>
+</div></section>
+
+<script src="fit.js"></script>
+</body>
+</html>

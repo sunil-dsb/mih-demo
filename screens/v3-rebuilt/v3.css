@@ -1,0 +1,82 @@
+/* MIH Pros Version 3: the pro estimate flow in Version 2's visual language (same colours, type, cards and buttons). */
+:root{--navy:#14213D;--blue:#115098;--t2:#3B4A60;--page:#EAF2FC;--line:#D5DEEA;--sel:#E3EEFC;--tile:#EEF2F7;--orange:#913111;--red:#9E1818}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;scrollbar-width:none}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:var(--navy);background:var(--page);-webkit-font-smoothing:antialiased}
+button,a{font:inherit;color:inherit;cursor:pointer;text-decoration:none}
+:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.scr{width:390px;height:844px;display:flex;flex-direction:column;background:var(--page)}
+/* header + progress (as on the Version 2 question screens) */
+.hd{background:var(--navy);padding:52px 12px 6px;display:flex;align-items:center;flex:none}
+.hd a,.hd span.sp{width:48px;height:48px;display:flex;align-items:center;justify-content:center;flex:none}
+.hd b{flex:1;text-align:center;font-size:20px;font-weight:700;color:#fff}
+.pg{height:6px;background:var(--line);flex:none}.pg i{display:block;height:6px;background:var(--blue)}
+.ct{flex:1;min-height:0;padding:22px 20px 32px;display:flex;flex-direction:column;gap:14px}
+h1{margin:0 0 6px;font-size:32px;font-weight:800;line-height:1.2;letter-spacing:-.5px;color:var(--navy)}
+.sub{margin:-12px 0 0;font-size:16px;font-weight:500;line-height:1.45;color:var(--t2)}
+.lb{font-size:18px;font-weight:700;color:var(--navy);margin-top:4px}
+.lb small{font-size:16px;font-weight:500;color:var(--t2)}
+.help{font-size:16px;font-weight:500;color:var(--t2);margin-top:-6px}
+.grow{flex:1}
+/* option cards */
+.opt{display:flex;align-items:center;gap:14px;width:100%;min-height:64px;padding:12px 18px;border-radius:20px;border:2px solid var(--line);background:#fff;text-align:left}
+.opt.on{border:3px solid var(--blue);background:var(--sel);padding:11px 17px}
+.opt .tx{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.opt b{font-size:20px;font-weight:700;color:var(--navy)}
+.opt .d{font-size:16px;font-weight:500;color:var(--t2)}
+.opt.urgent b{color:var(--orange)}.opt.emergency b{color:var(--red)}
+.ic{width:52px;height:52px;border-radius:16px;background:var(--tile);display:flex;align-items:center;justify-content:center;flex:none;color:var(--navy)}
+.opt.on .ic,.ic.navy{background:var(--navy);color:#fff}
+.tag{flex:none;padding:5px 12px;border-radius:999px;font-size:16px;font-weight:700;white-space:nowrap}
+.tag.o{background:#FFF1E6;color:var(--orange)}.tag.r{background:#FDECEC;color:var(--red)}.tag.b{background:var(--blue);color:#fff;font-size:14px;padding:4px 10px;align-self:flex-start}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.two .opt{justify-content:center;text-align:center;padding:12px 10px}.two .opt.on{padding:11px 9px}
+.two .opt b{font-size:18px}
+/* fields */
+.fld{background:#fff;border:2px solid var(--line);border-radius:20px;padding:16px 18px;font-size:18px;font-weight:500;line-height:1.45;color:var(--navy)}
+.fld.area{min-height:168px;display:flex;flex-direction:column;justify-content:space-between;gap:12px}
+.fld.zip{width:170px;min-height:60px;display:flex;align-items:center}
+.speak{align-self:flex-end;display:inline-flex;align-items:center;gap:8px;height:48px;padding:0 18px 0 14px;border-radius:24px;border:2px solid var(--line);background:#fff;font-size:16px;font-weight:700;color:var(--blue)}
+/* buttons */
+.btn{height:60px;flex:none;border:0;border-radius:30px;background:var(--blue);color:#fff;font-size:20px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px;width:100%}
+.btn.out{height:56px;border-radius:28px;border:3px solid var(--navy);background:#fff;color:var(--navy);font-size:18px}
+/* big action card (as "Video walkthrough" in Version 2) */
+.hero{display:flex;align-items:center;gap:16px;width:100%;padding:20px;border:0;border-radius:24px;background:var(--blue);color:#fff;text-align:left}
+.hero .ic{width:64px;height:64px;border-radius:20px;background:rgba(255,255,255,.16);color:#fff}
+.hero b{display:block;font-size:24px;font-weight:800;line-height:1.2}.hero span.d{font-size:16px;font-weight:500}
+.tile{display:flex;flex-direction:column;align-items:flex-start;gap:10px;min-height:92px;padding:16px;border-radius:20px;border:2px solid var(--line);background:#fff;font-size:20px;font-weight:700;color:var(--navy);text-align:left}
+.thumbs{display:flex;gap:12px}
+.th{position:relative;width:96px;height:96px;border-radius:16px;overflow:hidden;background:var(--tile);flex:none}
+.th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.th button{position:absolute;top:0;right:0;width:48px;height:48px;border:0;background:none;display:flex;align-items:flex-start;justify-content:flex-end;padding:6px}
+.th button span{width:28px;height:28px;border-radius:14px;background:#fff;color:var(--navy);display:flex;align-items:center;justify-content:center}
+/* waiting states (as "Building your estimate" in Version 2) */
+.wait{flex:1;padding:64px 32px 40px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.pct{font-size:72px;font-weight:800;letter-spacing:-3px;line-height:1;color:var(--navy)}.pct small{font-size:40px;letter-spacing:-1px}
+.ring{width:96px;height:96px;border-radius:50%;border:8px solid var(--line);border-top-color:var(--blue)}
+.wait h2{margin:16px 0 0;font-size:24px;font-weight:800;color:var(--navy)}
+.cl{align-self:stretch;margin-top:44px;display:flex;flex-direction:column;gap:18px;text-align:left}
+.cl div{display:flex;align-items:center;gap:14px;font-size:18px;font-weight:700;color:var(--navy)}
+.cl svg{color:var(--blue);flex:none}
+.spin{width:26px;height:26px;border-radius:13px;border:3px solid var(--line);border-top-color:var(--blue);border-right-color:var(--blue);flex:none}
+.foot{font-size:16px;font-weight:500;color:var(--t2);text-align:center;text-wrap:balance}
+/* question counter */
+.qp{display:flex;align-items:center;gap:12px}.qp i{flex:1;height:8px;border-radius:4px;background:var(--line);overflow:hidden}.qp i b{display:block;height:8px;border-radius:4px;background:var(--blue)}
+.qp span{font-size:16px;font-weight:700;color:var(--navy)}
+/* estimate */
+.pay{background:var(--navy);color:#fff;border-radius:24px;padding:16px 20px;display:flex;flex-direction:column;gap:4px}
+.pay .k{font-size:16px;font-weight:700}
+.pay .big{font-size:48px;font-weight:800;letter-spacing:-1.5px;line-height:1.1;white-space:nowrap}
+.pay .rw{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:16px;font-weight:500}
+.pay .rw b{font-weight:700;white-space:nowrap}
+.pay hr{border:0;height:1px;background:rgba(255,255,255,.25);margin:8px 0;width:100%}
+.pay .rw.me{font-size:18px;font-weight:700}.pay .rw.me b{font-size:32px;font-weight:800;letter-spacing:-.5px;line-height:1.1}
+.card{background:#fff;border-radius:24px;padding:14px 20px;display:flex;flex-direction:column;gap:10px}
+.card .hdr{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card .hdr b{font-size:18px;font-weight:700}
+.edit{display:inline-flex;align-items:center;gap:6px;height:48px;padding:0 16px 0 12px;border-radius:24px;border:2px solid var(--line);background:#fff;font-size:16px;font-weight:700;color:var(--navy)}
+.ln{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.ln .n{display:flex;flex-direction:column}.ln .n b{font-size:16px;font-weight:700}.ln .n span{font-size:14px;font-weight:500;color:var(--t2)}
+.ln > b{font-size:16px;font-weight:700;white-space:nowrap}
+.only{font-size:14px;font-weight:500;color:var(--t2)}
+.pay .k2{font-size:16px;font-weight:500;margin-top:6px}

@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en" data-theme="bright">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIH Pros · Version 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../tokens/tokens.css">
+<link rel="stylesheet" href="ui.css">
+<link rel="stylesheet" href="device.css">
+<style>
+/* board around the phones (not part of the app) */
+.vnav{display:flex;gap:8px;flex-wrap:wrap}.vnav a{display:inline-flex;align-items:center;min-height:44px;padding:0 16px;border-radius:999px;border:1px solid #6F7582;background:#fff;color:#14213D;font-weight:600;text-decoration:none}.vnav a[aria-current=page]{background:#14213D;border-color:#14213D;color:#fff}
+body{margin:0;background:#F6F7F9;font-family:Inter,system-ui,sans-serif;color:#151923}
+.board-head{max-width:1700px;margin:0 auto;padding:36px 32px 0;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.board-head h1{font-size:26px;line-height:1.2;margin:0;color:#14213D}
+.ts{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.ts button{min-height:44px;padding:0 14px;border-radius:12px;border:1px solid #6F7582;background:#fff;font:inherit;font-weight:600;cursor:pointer}
+.ts button[aria-pressed=true]{background:#14213D;color:#fff;border-color:#14213D}
+.ts button{display:inline-flex;align-items:center;gap:8px}
+.ts .sw{width:16px;height:16px;border-radius:4px;display:inline-block;box-shadow:0 0 0 1px rgba(255,255,255,.6)}
+main.screens-row{max-width:1700px;margin:0 auto;padding:16px 24px 80px}
+.compare{max-width:2600px;margin:0 auto;padding:16px 24px 8px}
+.cmp-h{font-size:22px;color:#14213D;margin:0 0 8px 8px}
+.cmp-row{display:flex;flex-wrap:wrap;gap:8px 0;justify-content:center}
+.cmp-l{font-weight:600;color:#14213D;text-align:center;margin:0 0 16px}
+@media (max-width:480px){main.screens-row{padding:16px 0 60px}.board-head{padding:24px 16px 0}}
+/* board mobile */
+@media (max-width:480px){.board-head{padding:20px 16px 0;gap:12px}.board-head h1{font-size:20px}.group{padding:16px 0 0}.group h2{margin-left:16px}main.screens-row{padding:8px 0 48px}}
+</style>
+</head>
+<body>
+<header class="board-head">
+ <h1>Version 1 · Service Pro · Sign in and create an estimate</h1>
+ <nav class="vnav" aria-label="Versions"><a href="version-1.html" aria-current="page">Version 1</a><a href="version-2.html">Version 2</a><a href="version-3.html">Version 3</a><a href="version-4.html">Version 4</a></nav>
+</header>
+
+<main class="screens-row">
+
+<!-- 1 · Sign in -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4 scroll-all">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="body" tabindex="0" style="padding-top:20px;gap:16px">
+  <div class="brand-row"><img src="assets/mih-logo.webp" alt="" width="44" height="44"><b>MIH Pros</b></div>
+  <span class="t-h1 login-h">Log in</span>
+  <div class="field"><span class="lbl soft" id="em">Email</span><label class="input"><input aria-labelledby="em" type="email" inputmode="email" autocomplete="email" value="mike@torreshomerepair.com"></label></div>
+  <div class="field"><span class="lbl soft" id="pw">Password</span><label class="input"><input aria-labelledby="pw" type="password" autocomplete="current-password" value="password1"><button class="fbtn-eye" aria-label="Show password" data-i="eye" data-s="22"></button></label></div>
+  <button class="btn btn-primary">Log in</button>
+  <button class="btn btn-text link-u" style="align-self:center;margin-top:-12px">Forgot password?</button>
+ </div>
+ <div class="foot"><p class="center t-sec" style="margin-bottom:6px">Or log in with</p><div class="social-row"><button class="btn btn-social" aria-label="Log in with Apple"><svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true"><path fill="#000" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg><span>Apple</span></button><button class="btn btn-social" aria-label="Log in with Google"><svg width="24" height="24" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303c-1.649 4.657-6.08 8-11.303 8-6.627 0-12-5.373-12-12s5.373-12 12-12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 12.955 4 4 12.955 4 24s8.955 20 20 20 20-8.955 20-20c0-1.341-.138-2.65-.389-3.917z"/><path fill="#FF3D00" d="m6.306 14.691 6.571 4.819C14.655 15.108 18.961 12 24 12c3.059 0 5.842 1.154 7.961 3.039l5.657-5.657C34.046 6.053 29.268 4 24 4 16.318 4 9.656 8.337 6.306 14.691z"/><path fill="#4CAF50" d="M24 44c5.166 0 9.86-1.977 13.409-5.192l-6.19-5.238A11.91 11.91 0 0 1 24 36c-5.202 0-9.619-3.317-11.283-7.946l-6.522 5.025C9.505 39.556 16.227 44 24 44z"/><path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303a12.04 12.04 0 0 1-4.087 5.571l.003-.002 6.19 5.238C36.971 39.205 44 34 44 24c0-1.341-.138-2.65-.389-3.917z"/></svg><span>Google</span></button></div><p class="center" style="margin-top:12px;padding-bottom:4px">New to MIH Pros? <button class="btn btn-text" style="display:inline-flex;padding:0 4px">Create an account</button></p></div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 2 · Role -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="nav" style="padding:4px 20px 0"><button class="ib soft" aria-label="Back" data-i="arrow-left" data-s="22"></button></div>
+ <div class="body" tabindex="0" style="padding-top:24px;gap:12px">
+  <span class="t-h1 login-h role-h" style="margin-bottom:0">How will you use<br>MIH Pros?</span>
+  <div class="roles big">
+   <button class="rolecard"><span class="rc-img"><img src="assets/role-customer.webp" alt="" width="146" height="120"></span><span class="rc-row"><span class="rc-t"><b>I'm a customer</b><span class="t-sec">Get a clear price for your repair</span></span><span class="rc-chev" data-i="chev" data-s="24"></span></span></button>
+   <button class="rolecard"><span class="rc-img"><img src="assets/role-service.webp" alt="" width="128" height="120"></span><span class="rc-row"><span class="rc-t"><b>I'm a service pro</b><span class="t-sec">Find local jobs and send estimates</span></span><span class="rc-chev" data-i="chev" data-s="24"></span></span></button>
+  </div>
+ </div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 3 · Pro home, empty (new pro: no jobs yet) -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="lt-head lt-left"><button class="avatar-btn" aria-label="Your profile, customers and settings"><img src="assets/pro-avatar.png" alt="" width="40" height="40"></button><span class="t-h1">Find jobs</span></div>
+ <div class="body jlist2 jlist-l" tabindex="0">
+  <div class="startcard"><div class="sc-body"><div class="sc-text"><b class="sc-t">Have your own customer?</b></div><img class="sc-img" src="assets/start-pro.webp" alt="" width="114" height="120"></div><button class="btn sc-btn" data-i="plus" data-s="20">New estimate</button></div>
+  <div class="empty" role="status"><span class="empty-ic" data-i="search" data-s="28"></span><b>No jobs near Phoenix yet</b><span class="t-sec">We'll alert you when one comes in.</span><button class="areapill" aria-label="Job area: Phoenix, within 25 miles. Change."><span data-i="pin" data-s="18"></span>Phoenix · 25 mi<span data-i="chev" data-s="16"></span></button></div>
+ </div>
+ <nav class="tabs t4" aria-label="Pro app, no jobs yet"><button class="tab on" aria-current="page"><span class="ti" data-i="search" data-s="24"></span>Find jobs</button><button class="tab"><span class="ti" data-i="briefcase" data-s="24"></span>My jobs</button><button class="tab"><span class="ti" data-i="msg" data-s="24"></span>Messages</button><button class="tab"><span class="ti" data-i="file" data-s="24"></span>Estimates</button></nav>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 4 · Pro home, with jobs -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="lt-head lt-left"><button class="avatar-btn" aria-label="Your profile, customers and settings"><img src="assets/pro-avatar.png" alt="" width="40" height="40"></button><span class="t-h1">Find jobs</span></div>
+ <div class="usearch2"><label class="us-field2"><span data-i="search" data-s="20"></span><input type="search" aria-label="Search jobs near you" placeholder="Search jobs"></label><button class="us-filter2 labelled" aria-label="Filters, 2 on"><span data-i="sliders" data-s="20"></span>Filters</button></div>
+ <div class="body jlist2 jlist-l" tabindex="0">
+  <button class="nextjob" aria-label="Your next job: Repair a fence gate, today 2:00 PM, Marcus Reed, Chandler. Opens My jobs."><span class="nj-top"><span class="nj-when">Today · 2:00 PM</span><span class="nj-go">See my jobs<span data-i="chev" data-s="18"></span></span></span><span class="nj-main"><span class="nj-text"><b class="nj-t">Repair a fence gate</b><span class="nj-s">Marcus Reed · Chandler</span></span></span></button>
+  <div class="sec-row"><span class="sec-t">New jobs near you</span></div>
+  <button class="jl"><span class="jl-ph"><img src="assets/jobs/pipe-sq.jpg" alt="Leaking pipe under the sink" width="110" height="110"><span class="bdg emergency jl-bdg" data-i="siren" data-s="14">Emergency</span></span><span class="jl-body"><b>Burst pipe under the kitchen</b><span class="jl-line"><span data-i="pin" data-s="18"></span>Mesa · 2.1 mi</span><span class="jk-price">$180–260</span></span></button>
+  <button class="jl"><span class="jl-ph"><img src="assets/jobs/heater-sq.jpg" alt="The water heater" width="110" height="110"><span class="bdg warn jl-bdg" data-i="clock" data-s="14">Urgent</span></span><span class="jl-body"><b>Water heater leaking</b><span class="jl-line"><span data-i="pin" data-s="18"></span>Tempe · 4.2 mi</span><span class="jk-price">$1,300–1,600</span></span></button>
+  <button class="jl"><span class="jl-ph"><img src="assets/jobs/fan-sq.jpg" alt="Where the ceiling fan goes" width="110" height="110"></span><span class="jl-body"><b>Install a ceiling fan</b><span class="jl-line"><span data-i="pin" data-s="18"></span>Phoenix · 6.0 mi</span><span class="jk-price">$150–220</span></span></button>
+  <button class="jl"><span class="jl-ph"><img src="assets/jobs/faucet-sq.jpg" alt="The old kitchen faucet" width="110" height="110"></span><span class="jl-body"><b>Replace kitchen faucet</b><span class="jl-line"><span data-i="pin" data-s="18"></span>Scottsdale · 7.5 mi</span><span class="jk-price">$220–280</span></span></button>
+ </div>
+ <button class="fab" aria-label="New estimate" data-i="plus" data-s="28"></button>
+ <nav class="tabs t4" aria-label="Pro app"><button class="tab on" aria-current="page"><span class="ti" data-i="search" data-s="24"></span>Find jobs</button><button class="tab"><span class="ti" data-i="briefcase" data-s="24"><span class="cnt" aria-label="1 needs you">1</span></span>My jobs</button><button class="tab"><span class="ti" data-i="msg" data-s="24"><span class="cnt" aria-label="2 unread">2</span></span>Messages</button><button class="tab"><span class="ti" data-i="file" data-s="24"></span>Estimates</button></nav>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 5 · Step 1 · The job -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="nav fl-nav"><button class="ib soft" aria-label="Back. Your draft is saved." data-i="arrow-left" data-s="22"></button></div>
+ <div class="fprog" role="img" aria-label="Step 1 of 2, The job"><i><b style="width:100%"></b></i><i><b style="width:0%"></b></i></div>
+ <div class="body fl-body" tabindex="0">
+  <span class="t-h1 fl-q" id="q-job">What's the job?</span>
+  <div class="field"><span class="lbl" id="q-trade">Trade</span><button class="selrow" aria-haspopup="listbox" aria-labelledby="q-trade q-trade-v"><span class="sel-v" id="q-trade-v">Plumbing</span><span class="sel-chev" data-i="chev" data-s="20"></span></button></div>
+  <div class="field"><span class="lbl" id="q-desc">Describe the job</span><div class="input top fl-text"><textarea aria-labelledby="q-desc" placeholder="What's wrong, where it is, how old it is">Water heater is leaking at the base. About 12 years old, 50-gallon gas unit.</textarea><button class="speak"><span class="speak-ic" data-i="mic" data-s="18"></span>Speak</button></div></div>
+  <div class="aboxes" role="group" aria-label="Add to this job"><button class="abox" aria-label="Add a photo"><span data-i="camera" data-s="24"></span>Photo</button><button class="abox" aria-label="Add a video"><span data-i="video" data-s="24"></span>Video</button><button class="abox" aria-label="Add a pdf"><span data-i="file" data-s="24"></span>PDF</button></div>
+ </div>
+ <div class="foot fl-foot"><button class="btn btn-primary">Continue</button></div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 6 · Step 2 · Materials and timing -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="nav fl-nav"><button class="ib soft" aria-label="Back" data-i="arrow-left" data-s="22"></button></div>
+ <div class="fprog" role="img" aria-label="Step 2 of 2, Materials and timing"><i><b style="width:100%"></b></i><i><b style="width:100%"></b></i></div>
+ <div class="body fl-body" tabindex="0">
+  <span class="t-h1 fl-q" id="q-tm">Materials and timing</span>
+  <div class="field"><span class="lbl" id="q-mat">Who buys the materials?</span><div class="segc" role="radiogroup" aria-labelledby="q-mat"><button role="radio" aria-checked="true" data-help="Materials are included in your price.">I'll buy them</button><button role="radio" aria-checked="false" data-help="Materials are not included in your price.">Customer buys</button></div><span class="help" aria-live="polite">Materials are included in your price.</span></div>
+  <div class="field"><span class="lbl" id="q-soon">How soon?</span><div class="rlist" role="radiogroup" aria-labelledby="q-soon"><button class="rrow" role="radio" aria-checked="true"><span class="radio" aria-hidden="true"></span><span class="rr-t">Standard</span><span class="rr-d">A few days</span></button><button class="rrow" role="radio" aria-checked="false"><span class="radio" aria-hidden="true"></span><span class="rr-t">Urgent</span><span class="rr-d">Today · +$75</span></button><button class="rrow" role="radio" aria-checked="false"><span class="radio" aria-hidden="true"></span><span class="rr-t">Emergency</span><span class="rr-d">2 hours · +$150</span></button></div></div>
+  <div class="field"><span class="lbl" id="q-zip">Job ZIP code <span class="opt-tag">(optional)</span></span><label class="input zip"><input aria-labelledby="q-zip" inputmode="numeric" autocomplete="postal-code" value="85018"></label></div>
+ </div>
+ <div class="foot fl-foot"><button class="btn btn-primary">Continue</button></div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 7 · AI question (the app asks a few short questions about this job, one per screen) -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="nav fl-nav"><button class="ib soft" aria-label="Back" data-i="arrow-left" data-s="22"></button><span class="fl-step">Question 2 of 5</span></div>
+ <div class="fprog" role="img" aria-label="Question 2 of 5"><i><b style="width:40%"></b></i></div>
+ <div class="body fl-body qbody" tabindex="0">
+  <span class="t-h1 fl-q q-title" id="q-ai"><span class="q-emoji" aria-hidden="true">🏠</span>Where is the water heater?</span>
+  <div class="qcards" role="radiogroup" aria-labelledby="q-ai"><button class="qcard" role="radio" aria-checked="true"><span class="qc-t">Garage</span><span class="radio" aria-hidden="true"></span></button><button class="qcard" role="radio" aria-checked="false"><span class="qc-t">Inside closet</span><span class="radio" aria-hidden="true"></span></button><button class="qcard" role="radio" aria-checked="false"><span class="qc-t">Attic</span><span class="radio" aria-hidden="true"></span></button><button class="qcard" role="radio" aria-checked="false"><span class="qc-t">Outside</span><span class="radio" aria-hidden="true"></span></button><button class="qcard" role="radio" aria-checked="false"><span class="qc-t">Not sure</span><span class="radio" aria-hidden="true"></span></button></div>
+ </div>
+ <div class="foot fl-foot"><button class="btn btn-primary">Continue</button></div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 8 · Building the estimate -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="nav fl-nav"><button class="ib soft" aria-label="Leave. Your estimate keeps building and we'll notify you when it's ready." data-i="x" data-s="22"></button></div>
+ <div class="body fl-body bld" tabindex="0">
+  <div class="bld-ring" role="img" aria-label="Working"><span class="bld-arc"></span><img src="assets/mih-logo.webp" alt="" width="84" height="84"></div>
+  <div class="bld-head"><span class="t-h1 fl-q">Building your estimate</span><span class="t-sec">Usually takes under a minute</span></div>
+  <ul class="checks" aria-live="polite">
+   <li class="done"><span data-i="circle-check" data-s="24"></span>Job details</li>
+   <li class="done"><span data-i="circle-check" data-s="24"></span>Your answers</li>
+   <li class="now"><span data-i="loader" data-s="24" class="spin"></span>Checking Phoenix-area prices</li>
+   <li class="todo"><span data-i="circle" data-s="24"></span>Your price</li>
+  </ul>
+ </div>
+ <div class="foot fl-foot"><p class="foot-note">We'll open it when it's ready, or notify you if you leave.</p></div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 9 · Your estimate -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="nav fl-nav"><button class="ib soft" aria-label="Close. Your draft is saved." data-i="x" data-s="22"></button></div>
+ <div class="body fl-body es" tabindex="0">
+  <div class="es-head"><span class="t-h1 fl-q">Your estimate</span><span class="t-sec">Water heater replacement</span></div>
+  <div class="es-hero"><span class="es-k">Customer pays</span><span class="t-display">$1,436.58</span><span class="es-rows"><span class="es-row"><span>MIH fee (5%)</span><span>−$71.83</span></span><span class="es-row strong"><span>You receive</span><b>$1,364.75</b></span></span></div>
+  <div class="note warn"><span data-i="info" data-s="20"></span><div><b>Priced as a full replacement</b>Check each line before you send.</div></div>
+  <div class="field"><div class="es-sec"><span class="t-title">Price breakdown</span><button class="btn btn-tonal es-editp" aria-label="Edit the price breakdown" data-i="pencil" data-s="18">Edit</button></div>
+   <div class="es-card">
+    <div class="es-line"><span class="es-l"><b>Labor</b><span class="t-sec">5 hrs × $95</span></span><span class="es-amt">$475.00</span></div>
+    <div class="es-line"><span class="es-l"><b>Haul away old unit</b></span><span class="es-amt">$45.00</span></div>
+    <div class="es-line"><span class="es-l"><b>Materials</b><span class="t-sec">Heater, lines, fittings</span></span><span class="es-amt">$844.00</span></div>
+    <div class="es-line"><span class="es-l"><b>Tax</b><span class="t-sec">8.6% on materials</span></span><span class="es-amt">$72.58</span></div>
+   </div>
+   <span class="help">Only you see this breakdown.</span></div>
+  <div class="field"><span class="t-title">Work included</span>
+   <ol class="steps-list"><li><span class="n">1</span>Remove the old heater</li><li><span class="n">2</span>Install the new heater</li><li><span class="n">3</span>Test and clean up</li></ol>
+  </div>
+ </div>
+ <div class="foot line-top"><button class="btn btn-primary" data-i="send" data-s="20">Send to a customer</button></div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+<!-- 10 · Sent -->
+<div class="screen-slot"><div class="phone"><span class="island"></span>
+<div class="screen m ty4">
+ <div class="statusbar"><span>9:41</span><span class="sb-ic"><i class="ic-cell"></i><i class="ic-wifi"></i><i class="ic-batt"></i></span></div>
+ <div class="body fl-body sent" tabindex="0">
+  <span class="done-ic" data-i="check" data-s="30"></span>
+  <div class="es-head"><span class="t-h1 fl-q">Sent to Linda</span><span class="t-sec">We'll notify you when Linda views it or replies.</span></div>
+  <button class="es-card sent-card" aria-label="View estimate: Water heater replacement, $1,436.58"><span class="es-line"><span class="es-l"><b>Water heater replacement</b><span class="sent-amt">$1,436.58</span><span class="t-sec">Sent by text · Valid 30 days</span></span><span class="sent-chev" data-i="chev" data-s="20"></span></span></button>
+ </div>
+ <div class="foot fl-foot"><button class="btn btn-primary" data-i="msg" data-s="20">Message Linda</button><button class="btn btn-tonal">Back to home</button></div>
+ <div class="home-ind" aria-hidden="true"></div>
+</div></div></div>
+
+</main>
+<script src="icons.js"></script>
+<script>
+document.querySelectorAll('.ts button').forEach(b=>b.addEventListener('click',()=>{
+ document.documentElement.dataset.theme = b.dataset.theme;
+ document.querySelectorAll('.ts button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+}));
+</script>
+<script>
+document.querySelectorAll('.segc').forEach(function(g){g.addEventListener('click',function(e){var b=e.target.closest('[role=radio]');if(!b)return;
+ g.querySelectorAll('[role=radio]').forEach(function(x){x.setAttribute('aria-checked',x===b?'true':'false')});
+ var h=g.parentElement.querySelector('.help');if(h&&b.dataset.help)h.textContent=b.dataset.help;});});
+</script>
+<script src="fit.js"></script>
+</body>
+</html>

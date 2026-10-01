@@ -1,0 +1,44 @@
+/* MIH Pros — device.css
+   Phone hardware mockup (bezel, island, status bar, home indicator) and the gallery around it.
+   Presentation only, never part of the app design system. Same device as the RoofBros package:
+   authored at true 1x (390 wide) and shown smaller with --device-scale so a whole phone fits the viewport. */
+
+:root { --device-scale: 0.85; --device-w: 390px; --device-h: 800px; }
+.phone, .phone *, .phone *::before, .phone *::after { box-sizing: border-box; } /* same as RoofBros: 390 wide including the bezel */
+
+.phone {
+  width: var(--device-w); height: var(--device-h);
+  background: #0A0A0A; border-radius: 56px; padding: 9px; position: relative; flex: none;
+  box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.25);
+  transform: scale(var(--device-scale)); transform-origin: top left;
+  margin-right: calc(var(--device-w) * (var(--device-scale) - 1));
+  margin-bottom: calc(var(--device-h) * (var(--device-scale) - 1));
+}
+.island { position: absolute; top: 21px; left: 50%; transform: translateX(-50%); width: 98px; height: 28px; border-radius: 999px; background: #0A0A0A; z-index: 50; }
+.screen { position: relative; height: 100%; width: 100%; border-radius: 47px; background: var(--bg-page); overflow: hidden; display: flex; flex-direction: column; }
+.statusbar { height: 56px; flex: none; display: flex; align-items: flex-end; justify-content: space-between; padding: 0 28px 8px;
+  font-family: Inter, system-ui, sans-serif; font-weight: 600; font-size: 14px; color: var(--text-primary); }
+.sb-ic { display: flex; align-items: center; gap: 6px; }
+.sb-ic i { display: inline-block; background: currentColor; -webkit-mask-size: contain; mask-size: contain; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat; -webkit-mask-position: center; mask-position: center; }
+.ic-cell { width: 18px; height: 12px;
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>'); }
+.ic-wifi { width: 17px; height: 12px;
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12" fill="none" stroke="black" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.5a10 10 0 0 1 13 0"/><path d="M4 7.5a6.5 6.5 0 0 1 8 0"/><circle cx="8" cy="10.4" r="1.4" fill="black" stroke="none"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 12" fill="none" stroke="black" stroke-width="1.8" stroke-linecap="round"><path d="M1.5 4.5a10 10 0 0 1 13 0"/><path d="M4 7.5a6.5 6.5 0 0 1 8 0"/><circle cx="8" cy="10.4" r="1.4" fill="black" stroke="none"/></svg>'); }
+.ic-batt { width: 25px; height: 12px;
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 12" fill="none" stroke="black"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" opacity="0.45"/><rect x="2.5" y="2.5" width="15" height="7" rx="2" fill="black" stroke="none"/><path d="M23.5 4.2v3.6" stroke-width="1.6" stroke-linecap="round" opacity="0.45"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 25 12" fill="none" stroke="black"><rect x="0.5" y="0.5" width="21" height="11" rx="3.5" opacity="0.45"/><rect x="2.5" y="2.5" width="15" height="7" rx="2" fill="black" stroke="none"/><path d="M23.5 4.2v3.6" stroke-width="1.6" stroke-linecap="round" opacity="0.45"/></svg>'); }
+.home-ind { flex: none; height: 24px; display: grid; place-items: center; }
+.home-ind::after { content: ''; width: 132px; height: 5px; border-radius: 999px; background: var(--text-primary); opacity: 0.85; }
+
+/* gallery */
+.screens-row { display: flex; gap: 26px; flex-wrap: wrap; justify-content: center; padding: 24px 0; }
+.screen-slot { width: calc(var(--device-w) * var(--device-scale)); max-width: 100%; }
+
+/* small screens: one phone per row, kept at its design size and scaled down to fit the width (--device-scale is set by fit.js) */
+@media (max-width: 480px) {
+  :root { --device-scale: 0.9; }
+  .screens-row { gap: 20px; padding: 16px 0; }
+  .screen-slot { margin: 0 auto; }
+}

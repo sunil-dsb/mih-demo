@@ -1,0 +1,629 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MIH Pros Design System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;600;800&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tokens/tokens.css">
+<link rel="stylesheet" href="components.css">
+<script src="tokens/tokens.js"></script>
+<style>
+/* ---------- documentation page only (not part of the app) ---------- */
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:#fff;color:var(--text-primary);font-family:Inter,-apple-system,"SF Pro Text",Roboto,system-ui,sans-serif;font-size:17px;line-height:1.55;font-variant-numeric:tabular-nums}
+a{color:var(--text-link)}
+.doc{max-width:1160px;margin:0 auto;padding:0 20px 96px}
+.doc-head{padding:48px 0 28px;border-bottom:1px solid var(--border-divider)}
+.kicker{font-size:15px;font-weight:600;color:var(--text-secondary);margin:0 0 10px}
+.doc h1{font-size:40px;line-height:1.12;font-weight:800;letter-spacing:-.025em;margin:0 0 14px;color:var(--text-brand);max-width:900px}
+.lead{font-size:20px;line-height:1.5;max-width:780px;margin:0;color:var(--text-secondary)}
+.ts-ctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:22px}
+.ts-ctl span{font-weight:600}
+.ts-ctl button{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid var(--border-input);background:#fff;font:inherit;font-weight:600;cursor:pointer}
+.ts-ctl button[aria-pressed=true]{background:var(--action-primary);color:#fff;border-color:var(--action-primary)}
+nav.toc{display:flex;flex-wrap:wrap;gap:4px 18px;padding:12px 0;border-bottom:1px solid var(--border-divider);position:sticky;top:0;background:#fff;z-index:5}
+nav.toc a{font-weight:600;text-decoration:none;color:var(--text-brand);min-height:44px;display:inline-flex;align-items:center}
+nav.toc a:hover{text-decoration:underline}
+section{padding:52px 0 8px;scroll-margin-top:70px}
+.doc h2{font-size:32px;line-height:1.2;font-weight:800;letter-spacing:-.02em;margin:0 0 8px;color:var(--text-brand)}
+.doc h3{font-size:22px;line-height:1.3;font-weight:700;margin:40px 0 10px}
+.sub{color:var(--text-secondary);max-width:780px;margin:0 0 22px}
+.doc p{max-width:780px}
+.doc ul.plain{max-width:820px;padding-left:22px;margin:0}
+.doc ul.plain li{margin:0 0 10px}
+table.t{width:100%;border-collapse:collapse;margin:8px 0 24px}
+.t th{text-align:left;font-size:15px;font-weight:700;color:var(--text-secondary);padding:10px 12px;border-bottom:2px solid var(--text-brand);vertical-align:bottom}
+.t td{padding:11px 12px;border-bottom:1px solid var(--border-divider);vertical-align:top}
+code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px;background:var(--bg-card);padding:1px 6px;border-radius:6px}
+.scroll{overflow-x:auto}
+.brand-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.brand-sw{border-radius:16px;padding:18px;min-height:140px;display:flex;flex-direction:column;justify-content:space-between;border:1px solid var(--border-divider)}
+.brand-sw b{font-size:22px}
+.ramp{display:grid;grid-template-columns:repeat(11,1fr);gap:6px;margin:0 0 22px}
+.sw{font-size:14px;line-height:18px;font-weight:700}
+.sw i{display:block;height:60px;border-radius:12px;margin-bottom:6px;border:1px solid rgba(0,0,0,.06)}
+.sw small{display:block;font-weight:500;font-size:14px;color:var(--text-secondary)}
+.ramp-name{display:flex;align-items:baseline;gap:12px;margin:0 0 8px;flex-wrap:wrap}
+.ramp-name b{font-size:20px}.ramp-name span{color:var(--text-secondary)}
+.pass{color:var(--text-success);font-weight:700}.fail{color:var(--text-danger);font-weight:700}
+.chip-sw{display:inline-block;width:18px;height:18px;border-radius:5px;vertical-align:-3px;margin-right:6px;border:1px solid var(--border-divider)}
+.type-row{display:grid;grid-template-columns:190px 1fr;gap:24px;align-items:baseline;padding:14px 0;border-bottom:1px solid var(--border-divider)}
+.type-row .tmeta{color:var(--text-secondary);font-size:15px}
+.type-row .tmeta b{display:block;color:var(--text-primary);font-size:17px}
+.fonts{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.font-card{border:1px solid var(--border-divider);border-radius:16px;padding:20px}
+.font-card .fname{font-size:15px;font-weight:700;color:var(--text-secondary);margin-bottom:10px}
+.space-row{display:flex;align-items:center;gap:16px;padding:5px 0}
+.space-row span{width:90px;color:var(--text-secondary)}
+.space-bar{height:18px;background:var(--blue-700);border-radius:4px}
+.radius-row{display:flex;gap:16px;flex-wrap:wrap}
+.radius-box{width:112px;height:80px;background:var(--bg-card);border:2px solid var(--text-brand);display:flex;align-items:flex-end;padding:10px;font-weight:600}
+.cgroup{margin-top:44px}
+.cgroup>h3{margin-top:0}
+.board{display:grid;grid-template-columns:repeat(auto-fill,minmax(360px,1fr));gap:22px;align-items:start}
+.spec{border:1px solid var(--border-divider);border-radius:16px;overflow:hidden;background:#fff}
+.spec-head{padding:12px 16px;border-bottom:1px solid var(--border-divider);font-size:17px;font-weight:700;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.spec-head small{font-weight:500;color:var(--text-secondary);font-size:15px}
+.spec-body{padding:20px;display:flex;flex-direction:column;gap:12px;max-width:400px}
+.spec-note{padding:12px 16px;border-top:1px solid var(--border-divider);font-size:15px;line-height:1.5;color:var(--text-secondary)}
+.spec-note ul{margin:0;padding-left:18px}
+.phones{display:flex;gap:24px;flex-wrap:wrap;align-items:flex-start}
+.phone-cap{font-weight:700;margin:0 0 10px}
+.st{font-weight:700}.st.keep{color:var(--text-success)}.st.new{color:var(--text-link)}.st.merge{color:var(--text-warning)}.st.drop{color:var(--text-danger)}
+@media (max-width:760px){.brand-row{grid-template-columns:1fr 1fr}.ramp{grid-template-columns:repeat(4,1fr)}.type-row{grid-template-columns:1fr;gap:4px}.fonts{grid-template-columns:1fr}.doc h1{font-size:32px}.board{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<main class="doc">
+
+<header class="doc-head">
+ <p class="kicker">MIH Pros · Design system v4.2 · September 30, 2026 · Homeowner and Service Pro apps, iOS and Android</p>
+ <h1>Navy on white. AAA everywhere. Built for the Phoenix sun and for readers up to 80.</h1>
+ <p class="lead">Every text colour passes 7:1 on every surface it can sit on, checked by a script. Type follows one rule, 17 × 1.15ⁿ. The components carry over what worked in v3 (calm status badges, the job timeline, the photo states) and add what the estimate and change-before-start flows need.</p>
+ <div class="ts-ctl" role="group" aria-label="Preview the app at a phone text size"><span>Preview phone text size:</span><button type="button" data-ts="1" aria-pressed="true">Default</button><button type="button" data-ts="1.5" aria-pressed="false">150%</button><button type="button" data-ts="2" aria-pressed="false">200%</button></div>
+</header>
+
+<nav class="toc" aria-label="Sections">
+ <a href="#principles">Principles</a><a href="#colour">Colour</a><a href="#contrast">Contrast proof</a><a href="#type">Type</a><a href="#space">Spacing</a><a href="#platforms">iOS &amp; Android</a><a href="#components">Components</a><a href="#screens">Screens</a><a href="#v3">From v3</a><a href="#sources">Research</a>
+</nav>
+
+<section id="principles">
+ <h2>Principles</h2>
+ <p class="sub">When a choice is unclear, the rule higher on this list wins.</p>
+ <ul class="plain">
+  <li><b>Readable in direct sun.</b> Text 7:1 or more on every surface. Meaningful icons, and any edge that is the only thing showing a control (inputs, outline buttons, radios, checkboxes, chips), 4.5:1 or more. Tiles (choice, day, slot, capture) are identified by their label and carry a faint decorative edge, which WCAG allows. Glare lowers the contrast a screen actually shows, so we start high.</li>
+  <li><b>One screen, one job.</b> One question or one decision per screen, one navy button in the thumb zone. Step flows hide the tab bar.</li>
+  <li><b>Loudness matches urgency.</b> Everyday states are calm (grey badge, coloured dot, the word). Something that needs action gets a tint and an icon. Only Urgent (amber) and Emergency (red) get a solid colour block.</li>
+  <li><b>Money is always itemised.</b> Labor and materials are separate, each line shows quantity × rate, and any change before the job starts shows the old value, the new value and the pro's reason.</li>
+  <li><b>Same words everywhere.</b> The two roles are <b>customer</b> and <b>pro</b>. Pros call their customers <b>clients</b> (the Clients tab, "Client supplies"). Money from a pro is a <b>quote</b> on a public job and an <b>estimate</b> when a pro sends one to a client; the AI's first number is the <b>instant quote</b>. Both apps end their tabs with <b>Menu</b>.</li>
+  <li><b>Plain and real.</b> White page, flat grey cards, no gradients, glows, card shadows, sparkle icons or stock illustrations. Words and an icon on every status, never colour alone.</li>
+ </ul>
+</section>
+
+<section id="colour">
+ <h2>Colour</h2>
+ <p class="sub">Five families generated in OKLCH, each shade pinned to a contrast target against white, so the same number behaves the same in every family. Coloured text uses shade 800; icons and control edges use 600–700; tints are 50–100.</p>
+ <div class="brand-row" id="brandRow"></div>
+ <div id="ramps"></div>
+ <h3>Semantic tokens</h3>
+ <p class="sub">Components use only these names.</p>
+ <div class="scroll" tabindex="0" role="region" aria-label="Semantic colour tokens table"><table class="t" id="semTable"><thead><tr><th>Token</th><th>Primitive</th><th>Hex</th><th>Use</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section id="contrast">
+ <h2>Contrast proof</h2>
+ <p class="sub" id="contrastLead"></p>
+ <div class="scroll" tabindex="0" role="region" aria-label="Contrast checks table"><table class="t" id="checkTable"><thead><tr><th>Pair</th><th>Sample</th><th>Ratio</th><th>Needs</th><th>Result</th></tr></thead><tbody></tbody></table></div>
+ <p class="sub">Exempt by design: <code>border-divider</code> and <code>border-tile</code> (decorative lines; the label, radio or icon identifies the control), <code>text-disabled</code> (WCAG exempts disabled controls) and <code>bg-changed</code> (a tint that supports the "Changed" tag). Change colours only in <code>build/build_tokens.py</code>; it rewrites every token file and exits with an error if any pair drops below its line.</p>
+</section>
+
+<section id="type">
+ <h2>Type</h2>
+ <h3 style="margin-top:8px">The rule: size = 17 × 1.15ⁿ</h3>
+ <p>Base 17 is Apple's default Body size (Android's is 16), chosen for a 30–80 audience. The ×1.15 multiplier keeps headings phone-sized: the scale lands on Apple's Subhead (15), Body (17), Title 3 (20), Title 2 (22) and Large Title (34). Line heights are ratios, so they grow with the text. Sizes are in pt on iOS and sp on Android and follow the phone's text-size setting; the largest styles stop growing at the cap shown, so a price never runs off a 360-wide screen.</p>
+ <div class="scroll" tabindex="0" role="region" aria-label="Type scale table"><table class="t" id="typeTable"><thead><tr><th>Token</th><th>Rule</th><th>Exact</th><th>Size / line</th><th>Weight</th><th>Grows to</th><th>Use</th></tr></thead><tbody></tbody></table></div>
+ <div id="typeSpec"></div>
+ <h3>Font: Inter</h3>
+ <p><b>Inter</b> (free, OFL) in 400–800. Of the US service apps whose fonts we could verify, Jobber and TaskRabbit use Inter; Housecall Pro uses Plus Jakarta Sans; Thumbtack and Angi use their own licensed fonts. Inter has the tallest x-height of the three free options below, a distinct 1 / l / I and true tabular figures, which matter for prices. Fallbacks: SF Pro on iOS, Roboto on Android. Bundle the four font files (about 100 KB) so both apps look the same.</p>
+ <div class="fonts" id="fontCompare"></div>
+</section>
+
+<section id="space">
+ <h2>Spacing, radius and size</h2>
+ <p class="sub">An 8-point grid with 4 and 12 for tight spots. Inner gaps are always smaller than outer gaps. Screen margin 20, card padding 20, 32 between sections, 12 between neighbouring tap targets.</p>
+ <div id="spaceRows"></div>
+ <h3>Radius</h3>
+ <div class="radius-row" id="radiusRow"></div>
+ <h3>Sizes</h3>
+ <div class="scroll" tabindex="0" role="region" aria-label="Sizes table"><table class="t"><thead><tr><th>Thing</th><th>Size</th><th>Why</th></tr></thead><tbody>
+  <tr><td>Any tap target</td><td>48 × 48 minimum</td><td>Android asks 48dp, iOS 44pt; older users miss and tire more on small targets.</td></tr>
+  <tr><td>Main button</td><td>56 tall, full width</td><td>The one action per screen, easy with a thumb or a gloved finger.</td></tr>
+  <tr><td>Other buttons, chips, stepper</td><td>48 tall</td><td>Lines up with the tap minimum.</td></tr>
+  <tr><td>Text input</td><td>56 tall, 2px border; the whole box takes the tap</td><td>Room for large text; no dead edges.</td></tr>
+  <tr><td>Checkbox, radio</td><td>24 visible inside a 48 row</td><td>The whole row is the label.</td></tr>
+  <tr><td>Icons</td><td>20 / 24 / 28, 2px stroke (Lucide)</td><td>2px stays visible in glare.</td></tr>
+  <tr><td>Avatars</td><td>32 / 40 / 56</td><td>Chat · lists · pro cards and tracking.</td></tr>
+  <tr><td>Top bar / tab bar</td><td>56 iOS, 64 Android / 64 + safe area</td><td>Platform heights.</td></tr>
+ </tbody></table></div>
+</section>
+
+<section id="platforms">
+ <h2>iOS and Android</h2>
+ <p class="sub">One visual system; navigation follows each platform so both apps feel native.</p>
+ <div class="scroll" tabindex="0" role="region" aria-label="Platform differences table"><table class="t"><thead><tr><th>Thing</th><th>iOS</th><th>Android</th></tr></thead><tbody>
+  <tr><td>Top bar</td><td>56, title centred, chevron back</td><td>64, title left, arrow back; system back gesture/button also goes back</td></tr>
+  <tr><td>Pressed state</td><td>Fill changes to the pressed token</td><td>Same token plus the standard ripple</td></tr>
+  <tr><td>Tab bar</td><td colspan="2">Five tabs, icon + one-word label, a 4px navy bar over the active tab. Tabs hide inside step flows. Labels are 14 (iOS uses 10, Android 12), one word, and keep their size at large text settings; long-press shows the large label (iOS Large Content Viewer). Pro tabs: Home, Messages, Estimate, Clients, Menu. Customer tabs: Home, Messages, Request, Invoices, Menu. ("Customers" measures 74–82px; a tab on a 360 phone is 72.) On Android, long-press shows the label as a tooltip.</td></tr>
+  <tr><td>Sheets and dialogs</td><td colspan="2">Bottom sheet for choices and confirmations on both; system date/time pickers are allowed inside the sheet.</td></tr>
+  <tr><td>Safe areas</td><td colspan="2">Sticky bars and the tab bar add the bottom inset, so actions never sit under the home indicator or gesture bar.</td></tr>
+  <tr><td>Appearance</td><td><code>UIUserInterfaceStyle = Light</code> in Info.plist</td><td>Light theme, <code>android:forceDarkAllowed="false"</code></td></tr>
+  <tr><td>Text size</td><td>Dynamic Type, sizes in pt</td><td>Font scale, sizes in sp</td></tr>
+  <tr><td>Keyboards</td><td colspan="2">Hours and money open the decimal pad; phone opens the phone pad; ZIP opens the number pad.</td></tr>
+  <tr><td>Haptics</td><td colspan="2">A light tap on sending an estimate, accepting, paying; an error buzz on failed payment. Nothing else.</td></tr>
+ </tbody></table></div>
+ <p><b>Light only, for now.</b> Both apps force the light appearance so every colour pair above stays as tested. A dark set can be added later as a second theme with its own contrast checks.</p>
+ <div class="phones">
+  <div><p class="phone-cap">iOS top bar</p><div class="phone m" style="border-radius:20px"><div class="topbar"><button class="icon-btn plain" aria-label="Back" data-i="chev-left" data-s="28"></button><div class="tb-title">New estimate</div><span class="tb-spacer"></span></div></div></div>
+  <div><p class="phone-cap">Android top bar</p><div class="phone m" style="border-radius:20px"><div class="topbar android"><button class="icon-btn plain" aria-label="Back" data-i="arrow-left" data-s="24"></button><div class="tb-title">New estimate</div><button class="icon-btn plain" aria-label="More" data-i="more" data-s="24"></button></div></div></div>
+  <div><p class="phone-cap">Navy header (job request, pro side)</p><div class="phone m" style="border-radius:20px"><div class="topbar inverse"><button class="icon-btn plain" aria-label="Back" data-i="chev-left" data-s="28"></button><div class="tb-title">Water heater job</div><button class="icon-btn plain" aria-label="Chat" data-i="msg" data-s="24"></button></div></div></div>
+ </div>
+</section>
+
+<section id="components">
+ <h2>Components</h2>
+ <p class="sub">Every specimen is built only from the tokens and <code>components.css</code>. Use the text-size switch at the top to see each one at 150% and 200%.</p>
+
+ <div class="cgroup"><h3>Actions</h3><div class="board">
+  <div class="spec"><div class="spec-head">Button <small>kept from v3, restyled</small></div><div class="spec-body m">
+   <button class="btn btn-primary">Send estimate</button>
+   <button class="btn btn-primary is-pressed">Pressed: lighter navy</button>
+   <button class="btn btn-secondary md">Request changes</button>
+   <button class="btn btn-text">Chat with your pro</button>
+   <button class="btn btn-danger-outline md">Cancel job</button>
+   <button class="btn btn-danger md">Yes, cancel this job</button>
+   <button class="btn md" disabled>Add a photo to continue</button>
+   <button class="btn btn-primary"><span data-i="loader" data-s="20" class="spin"></span>Sending…</button>
+   <div class="btn-row"><button class="icon-btn" aria-label="Call" data-i="phone" data-s="24"></button><button class="icon-btn" aria-label="Message" data-i="msg" data-s="24"></button><button class="btn btn-secondary md">Directions</button></div>
+  </div><div class="spec-note"><ul><li>Navy primary, one per screen. Navy-outline secondary. Underlined text button for the way out.</li><li>Cancel is two taps: red outline first, solid red only in the confirm sheet.</li><li>Leading icon says what the action is; never an icon on both sides.</li></ul></div></div>
+  <div class="spec"><div class="spec-head">Sticky bar <small>kept</small></div><div class="spec-body m" style="padding:0">
+   <div class="sticky"><button class="btn btn-primary">Continue</button></div>
+   <div class="sticky"><div class="sum"><div><div class="t-title">$680.79</div><div class="help">Charged after the job</div></div><button class="btn btn-primary inline">Accept</button></div></div>
+   <div class="sticky"><button class="btn btn-primary">Accept $680.79</button><button class="btn btn-secondary md">Request changes</button><button class="btn btn-text md">Decline</button></div>
+  </div><div class="spec-note">Pinned above the safe area. One primary; others stack below it, full width, so labels never wrap into two cramped buttons.</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Inputs</h3><div class="board">
+  <div class="spec"><div class="spec-head">Text field <small>kept</small></div><div class="spec-body m">
+   <div class="field"><span class="field-label" id="lb1">Job title</span><label class="input"><input aria-labelledby="lb1" placeholder="e.g. Leaking kitchen tap"><span data-i="mic" data-s="24"></span></label><span class="help">Or tap the mic and say it.</span></div>
+   <div class="field"><span class="field-label" id="lb2">Rate per hour</span><label class="input is-focus"><span class="affix">$</span><input aria-labelledby="lb2" value="85" inputmode="decimal"><span class="affix">/ hr</span></label></div>
+   <div class="field"><span class="field-label" id="lb3">Mobile number</span><label class="input is-error"><input aria-labelledby="lb3" value="(602) 55" aria-invalid="true" aria-describedby="e3"></label><span class="err" id="e3" data-i="alert" data-s="20">Enter a 10-digit number, like (602) 555-0142</span></div>
+  </div><div class="spec-note">Label above, never inside. The whole 56 box takes the tap. Errors say how to fix it, at the field, with an icon.</div></div>
+  <div class="spec"><div class="spec-head">Textarea, search, stepper <small>new / kept</small></div><div class="spec-body m">
+   <div class="field"><span class="field-label" id="lb4">What needs to be done?</span><label class="input" style="align-items:flex-start;padding-top:14px"><textarea aria-labelledby="lb4" placeholder="Describe the problem, where it is and how long it's been happening"></textarea></label></div>
+   <label class="input search"><span data-i="search" data-s="24"></span><input aria-label="Search customers" placeholder="Name, street or phone"></label>
+   <div class="field"><span class="field-label">Labor hours</span><div class="stepper"><button aria-label="Fewer hours" data-i="minus" data-s="24"></button><output>7 hrs</output><button aria-label="More hours" data-i="plus" data-s="24"></button></div></div>
+  </div><div class="spec-note">Stepper for hours and quantities (48 buttons, the value between them); typing is still allowed with the decimal pad.</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Selection</h3><div class="board">
+  <div class="spec"><div class="spec-head">Choice tiles <small>RadioGroup card variant, kept</small></div><div class="spec-body m" role="radiogroup" aria-label="How soon">
+   <div class="choice is-selected" role="radio" aria-checked="true" tabindex="0"><span class="dot"></span><span class="opt-text"><b>Standard</b><span class="t-sec">In the next few days</span></span></div>
+   <div class="choice" role="radio" aria-checked="false" tabindex="-1"><span class="dot"></span><span class="opt-text"><b>Urgent</b><span class="t-sec">Today</span></span><span class="meta">Costs more</span></div>
+   <div class="choice" role="radio" aria-checked="false" tabindex="-1"><span class="dot"></span><span class="opt-text"><b>Emergency</b><span class="t-sec">Within 2 hours</span></span><span class="meta">Costs most</span></div>
+  </div><div class="spec-note">Grey tile with a faint edge; selected = blue tint, 2px blue edge, filled radio. The price effect is plain words on the right, not a tag. Never pre-select an option that costs more.</div></div>
+  <div class="spec"><div class="spec-head">Radio, checkbox, switch <small>kept</small></div><div class="spec-body m">
+   <label class="radio-row"><input type="radio" name="home" checked><span class="dot"></span><span class="opt-text"><b>Yes, I'll be home</b></span></label>
+   <label class="radio-row"><input type="radio" name="home"><span class="dot"></span><span class="opt-text"><b>No, I'll leave a key or code</b><span class="t-sec">Add the code after booking</span></span></label>
+   <label class="check"><input type="checkbox" checked><span class="box" data-i="check" data-s="16"></span><span class="opt-text"><b>I'll haul away the old unit</b><span class="t-sec">Saves $45</span></span></label>
+   <label class="check"><input type="checkbox"><span class="box" data-i="check" data-s="16"></span><span class="opt-text"><b>I'll clear access to the heater</b><span class="t-sec">Saves $30</span></span></label>
+   <button class="switch-row" role="switch" aria-checked="true"><span class="opt-text"><b>Text me when the pro is on the way</b></span><span class="switch" aria-hidden="true"><span data-i="check" data-s="14"></span></span></button>
+  </div><div class="spec-note">Blue = selected or on, everywhere. The whole row is the label. A switch only when the change saves at once.</div></div>
+  <div class="spec"><div class="spec-head">Chips, segmented control <small>chips kept · segmented new</small></div><div class="spec-body m">
+   <span class="field-label">Common problems</span>
+   <div class="chips"><button class="chip is-selected" data-i="check" data-s="18">Leaking tap</button><button class="chip">No hot water</button><button class="chip">Outlet dead</button><button class="chip">Something else</button></div>
+   <span class="field-label" style="margin-top:8px">Who supplies materials?</span>
+   <div class="seg" role="group" aria-label="Who supplies materials"><button aria-pressed="true">I'll supply</button><button aria-pressed="false">Client supplies</button></div>
+  </div><div class="spec-note">Chips: up to 5 quick answers, ending with "Something else". Segmented: 2–3 short equal options (the pro flow's materials). Selected = blue tint, blue edge and a check, like every other selection; navy is only for the main button.</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Status and feedback</h3><div class="board">
+  <div class="spec"><div class="spec-head">Status tags <small>v3 recipe, made AAA</small></div><div class="spec-body m">
+   <span class="field-label">Calm: everyday job states</span>
+   <div class="chips" style="gap:8px"><span class="tag calm active">New</span><span class="tag calm stopped">Draft</span><span class="tag calm waiting">Awaiting reply</span><span class="tag calm active">Estimate sent</span><span class="tag calm active">Scheduled</span><span class="tag calm active">In progress</span><span class="tag calm done">Completed</span><span class="tag calm done">Paid</span><span class="tag calm stopped">Cancelled</span></div>
+   <span class="field-label">Attention: someone must act</span>
+   <div class="chips" style="gap:8px"><span class="tag attn-warning" data-i="pencil" data-s="16">Changes requested</span><span class="tag attn-warning" data-i="alert" data-s="16">New price to approve</span><span class="tag attn-danger" data-i="circle-x" data-s="16">Payment overdue</span></div>
+   <span class="field-label">Priority: the only solid colours</span>
+   <div class="chips" style="gap:8px"><span class="tag urgent" data-i="clock" data-s="16">Urgent</span><span class="tag emergency" data-i="siren" data-s="16">Emergency</span></div>
+   <span class="field-label">Visibility and trust: icon + text, no box</span>
+   <div class="facts"><span class="trust" data-i="globe" data-s="18">Public job</span><span class="trust" data-i="badge-check" data-s="18">Verified by MIH Pros</span><span class="trust" data-i="file" data-s="18">Licensed in Arizona</span><span class="trust bg" data-i="shield" data-s="18">Background-checked</span><span class="rating" data-i="star" data-s="18">4.9 <span>(126)</span></span></div>
+  </div><div class="spec-note">Rectangles (radius 8) so they never look like buttons. The word always carries the meaning. A card shows at most one priority tag and one status tag.</div></div>
+  <div class="spec"><div class="spec-head">Alerts and toast <small>kept</small></div><div class="spec-body m">
+   <div class="alert warning"><span data-i="alert" data-s="24"></span><div class="a-body"><b>Mike changed the price</b>Labor went from 7 to 9 hours. Approve it before work starts.<br><button class="btn btn-text">Review the change</button></div></div>
+   <div class="alert danger"><span data-i="circle-x" data-s="24"></span><div class="a-body"><b>Your card was declined</b>You haven't been charged.<br><button class="btn btn-text">Use another card</button></div></div>
+   <div class="alert success"><span data-i="circle-check" data-s="24"></span><div class="a-body"><b>Estimate accepted</b>Linda accepted your $680.79 estimate.</div></div>
+   <div class="alert info"><span data-i="info" data-s="24"></span><div class="a-body"><b>Your pro confirms the final price</b>Nothing is charged until you approve it.</div></div>
+   <div class="toast"><span data-i="check" data-s="24"></span>Photo removed<button class="btn btn-text">Undo</button></div>
+  </div><div class="spec-note">Warning and danger get a tint and a hairline; success and info a tint only. Title in the status colour, body in normal text. Toasts are navy.</div></div>
+  <div class="spec"><div class="spec-head">Empty, loading, offline <small>kept</small></div><div class="spec-body m">
+   <div class="empty"><span data-i="user-x" data-s="28"></span><div class="t-title">No plumbers are free this week</div><p class="t-sec">Pros near 85018 are booked through Sunday. Pick other days, or we'll text you when one opens up.</p><div class="btn-row" style="width:100%"><button class="btn btn-primary md">Pick other days</button><button class="btn btn-secondary md">Text me</button></div></div>
+   <hr class="divider">
+   <div role="status" aria-label="Loading jobs" style="display:flex;gap:14px;align-items:center"><div class="sk" style="width:56px;height:56px;border-radius:12px"></div><div style="flex:1;display:flex;flex-direction:column;gap:8px"><div class="sk" style="height:16px;width:70%"></div><div class="sk" style="height:14px;width:45%"></div></div></div>
+   <hr class="divider">
+   <div class="empty"><span data-i="wifi-off" data-s="28"></span><div class="t-title">You're offline</div><p class="t-sec">Your saved jobs are still here. Messages send when you're back online.</p></div>
+  </div><div class="spec-note">Say what happened and the way forward. Never "Oops" or "No data". Skeletons stop pulsing with Reduce Motion.</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Content and lists</h3><div class="board">
+  <div class="spec"><div class="spec-head">Job rows <small>JobCard, kept</small></div><div class="spec-body m">
+   <div class="job-row"><span class="thumb" data-i="droplet" data-s="24"></span><div><div class="j-title">Leaking kitchen tap</div><div class="t-sec">Plumbing · Requested Sep 22</div></div><span class="chev" data-i="chev" data-s="24"></span><div class="j-bottom"><span class="tag attn-warning" data-i="pencil" data-s="16">Changes requested</span><b>$220</b></div></div>
+   <div class="job-row"><span class="thumb" data-i="zap" data-s="24"></span><div><div class="j-title">Replace ceiling fan</div><div class="t-sec">Electrical · Thu, Oct 2 · 8–10 AM</div></div><span class="chev" data-i="chev" data-s="24"></span><div class="j-bottom"><span class="tag calm active">Scheduled</span><b>$320</b></div></div>
+   <div class="job-row"><span class="thumb" data-i="hammer" data-s="24"></span><div><div class="j-title">Fix garage door track</div><div class="t-sec">Handyman · Aug 30</div></div><span class="chev" data-i="chev" data-s="24"></span><div class="j-bottom"><span class="tag calm done">Paid</span><b>$180</b></div></div>
+  <div class="nudge"><span class="ico" data-i="msg" data-s="24"></span><span class="r-text"><b>Leaking kitchen tap</b><span class="t-sec">3 pros sent quotes</span></span><button class="btn btn-primary md">Compare</button></div>
+   <div class="nudge"><span class="ico" data-i="droplet" data-s="24"></span><span class="r-text"><b>Faucet repair or replacement</b><span class="rating" data-i="star" data-s="16">4.8 <span>(1.2K)</span></span> <span class="t-sec">· From $149</span></span><button class="btn btn-secondary md">Get a quote</button></div>
+  </div><div class="spec-note">Lists are rows with hairlines, not stacks of cards. The whole row is one button; titles wrap, never truncate. A nudge row carries the job's one next action (Compare, Rate, Pay).</div></div>
+  <div class="spec"><div class="spec-head">List rows, section head <small>kept</small></div><div class="spec-body m">
+   <div class="section-head"><span class="t-h3">Your account</span></div>
+   <div>
+    <a class="row" href="#components"><span class="ico" data-i="user" data-s="24"></span><span class="r-text"><b>Profile</b><span class="t-sec">Linda Martinez</span></span><span class="chev" data-i="chev" data-s="24"></span></a>
+    <a class="row" href="#components"><span class="ico" data-i="pin" data-s="24"></span><span class="r-text"><b>My properties</b><span class="t-sec">3 addresses</span></span><span class="chev" data-i="chev" data-s="24"></span></a>
+    <a class="row" href="#components"><span class="ico" data-i="card" data-s="24"></span><span class="r-text"><b>Payment methods</b><span class="t-sec">Visa ending 4242</span></span><span class="chev" data-i="chev" data-s="24"></span></a>
+   </div>
+   <div class="section-head"><span class="t-h3">Top pros near you</span><button class="btn btn-text">See all</button></div>
+  </div><div class="spec-note">Row icons sit on a grey tile in brand blue. Section titles H3 with an optional "See all".</div></div>
+  <div class="spec"><div class="spec-head">Category tiles, avatar, role picker <small>kept / new</small></div><div class="spec-body m">
+   <div class="cats"><button class="cat"><span class="ic" data-i="droplet" data-s="28"></span>Plumbing</button><button class="cat"><span class="ic" data-i="zap" data-s="28"></span>Electrical</button><button class="cat"><span class="ic" data-i="wind" data-s="28"></span>AC and heating</button><button class="cat"><span class="ic" data-i="hammer" data-s="28"></span>Handyman</button></div>
+   <div style="display:flex;gap:12px;align-items:center"><span class="avatar sm">MT</span><span class="avatar md">MT</span><span class="avatar lg">MT</span><span class="t-sec">Photo, or initials until one exists</span></div>
+   <button class="role cust"><span class="ic" data-i="home" data-s="24"></span><span><span class="t-title" style="display:block">I'm a customer</span>Get a price for a repair in minutes</span></button>
+   <button class="role pro"><span class="ic" data-i="wrench" data-s="24"></span><span><span class="t-title t-brand" style="display:block">I'm a service pro</span><span class="t-sec">Send estimates and find jobs near you</span></span></button>
+  </div><div class="spec-note">Category icons are 28 in brand blue on a blue tint, only on Home. Role picker: the customer path is the navy one because most people are customers.</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Estimates and money</h3><div class="board">
+  <div class="spec"><div class="spec-head">Estimate (read) <small>new</small></div><div class="spec-body m">
+   <div class="card tight">
+    <div class="group-head">Labor</div>
+    <div class="line"><div class="l-text"><b>Patch and repaint wall</b><span class="t-sec">7 hrs × $85</span></div><div class="amt">$595.00</div></div>
+    <div class="group-head">Materials</div>
+    <div class="line"><div class="l-text"><b>Drywall sheet</b><span class="t-sec">2 × $18.50</span></div><div class="amt">$37.00</div></div>
+    <div class="line"><div class="l-text"><b>Paint, 1 gallon</b><span class="t-sec">1 × $42.00</span></div><div class="amt">$42.00</div></div>
+    <div class="line"><div class="l-text"><b>Tax on materials</b><span class="t-sec">8.6% of $79.00</span></div><div class="amt">$6.79</div></div>
+    <div class="total"><span class="t-title">Total</span><span class="amt t-h2 t-brand">$680.79</span></div>
+   </div>
+  </div><div class="spec-note">Labor and materials always separate; quantity × rate on every line; the total under a navy rule. Amounts drop under the label at large text sizes.</div></div>
+  <div class="spec"><div class="spec-head">Estimate builder (pro) <small>new</small></div><div class="spec-body m">
+   <div class="group-head">Labor</div>
+   <div class="edit-line"><div class="el-top"><b>Patch and repaint wall</b><button class="icon-btn plain" aria-label="Remove line" data-i="trash" data-s="22"></button></div><div class="stepper"><button aria-label="Fewer hours" data-i="minus" data-s="22"></button><output>7 hrs</output><button aria-label="More hours" data-i="plus" data-s="22"></button></div><div class="el-sum"><div class="t-sec">× $85 / hr</div><b>$595.00</b></div></div>
+   <div class="group-head">Materials</div>
+   <div class="edit-line"><div class="el-top"><b>Drywall sheet</b><button class="icon-btn plain" aria-label="Remove line" data-i="trash" data-s="22"></button></div><div class="stepper"><button aria-label="Fewer" data-i="minus" data-s="22"></button><output>2</output><button aria-label="More" data-i="plus" data-s="22"></button></div><div class="el-sum"><div class="t-sec">× $18.50</div><b>$37.00</b></div></div>
+   <button class="btn btn-secondary md" data-i="plus" data-s="20">Add a line</button>
+  </div><div class="spec-note">Each line: name, stepper for hours or quantity, rate, line total. Totals update live. "Add a line" asks Labor or Materials first.</div></div>
+  <div class="spec"><div class="spec-head">Change before the job starts <small>new</small></div><div class="spec-body m">
+   <div class="card tight">
+    <div class="line changed"><div class="l-text"><span class="tag attn-warning" data-i="pencil" data-s="14" style="margin-bottom:6px">Changed</span><b>Labor</b><span class="t-sec">9 hrs × $85 (was 7 hrs)</span></div><div class="amt"><span class="was">$595</span>$765</div></div>
+    <div class="line"><div class="l-text"><b>Materials</b><span class="t-sec">No change</span></div><div class="amt">$85.79</div></div>
+    <div class="total"><span class="t-title">New total</span><span class="amt t-h2 t-brand">$850.79</span></div>
+    <p class="t-sec" style="margin-top:12px">Mike's reason: "The damage behind the wall is bigger than the photos showed."</p>
+   </div>
+   <button class="btn btn-primary">Approve new price</button>
+   <button class="btn btn-secondary md">Ask Mike a question</button>
+  </div><div class="spec-note">Every changed line has the word "Changed", the old value struck through and the new one. The pro's reason is required. Nothing changes silently.</div></div>
+  <div class="spec"><div class="spec-head">Instant quote <small>QuoteCard, kept</small></div><div class="spec-body m">
+   <div class="card">
+    <span class="t-sec">Your instant quote · Water heater replacement</span>
+    <span class="t-display">$1,380–$1,560</span>
+    <span class="t-sec">Most jobs like this: $1,480</span>
+    <div><div class="inc yes" data-i="check" data-s="20">New 50-gallon heater, installed to code</div><div class="inc yes" data-i="check" data-s="20">Remove and haul away the old one</div><div class="inc no" data-i="minus" data-s="20">Gas line repairs, if needed</div></div>
+    <div class="meta"><span data-i="clock" data-s="18"></span>Price held until Fri, Oct 3</div>
+   </div>
+   <div class="card"><span class="t-sec">Your instant quote · Wall leak</span><span class="t-h1">$200–$900</span><div class="meta"><span data-i="info" data-s="18"></span>The range is wide because we can't see behind the wall. Your pro confirms a fixed price in writing before any work starts.</div></div>
+  </div><div class="spec-note">What's included and what isn't. A range wider than 2× must say why and what happens next.</div></div>
+  <div class="spec"><div class="spec-head">Payment summary <small>kept</small></div><div class="spec-body m">
+   <div>
+    <div class="line"><div class="l-text"><b>Wall repair</b></div><div class="amt">$680.79</div></div>
+    <div class="line"><div class="l-text"><b>Service fee</b><span class="t-sec">Covers the MIH Pros guarantee</span></div><div class="amt">$9.60</div></div>
+    <div class="line"><div class="l-text"><b>First-job credit</b></div><div class="amt" style="color:var(--text-success)">−$20.00</div></div>
+    <div class="total"><span class="t-title">Total</span><span class="amt t-title">$670.39</span></div>
+   </div>
+   <a class="row" href="#components"><span class="ico" data-i="card" data-s="24"></span><span class="r-text"><b>Visa ending 4242</b></span><span class="btn-text" style="font-weight:600">Change</span></a>
+   <div class="meta"><span data-i="lock" data-s="18"></span>You're charged only after you confirm the job is done.</div>
+  </div><div class="spec-note">Discounts use a minus sign as well as green. The Pay button repeats the total: "Pay $670.39".</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Jobs, pros and scheduling</h3><div class="board">
+  <div class="spec"><div class="spec-head">Quote comparison (public job) <small>ProCard, kept</small></div><div class="spec-body m">
+   <div class="sortbar"><span class="t-title">3 quotes</span><button class="sort-btn" data-i="sort" data-s="18">Sort: Lowest price</button></div>
+   <div class="card">
+    <div class="pro-head"><span class="avatar lg">DS</span><div class="p-text"><b>Desert Home Repair &amp; Remodeling LLC</b><div class="t-sec">Maria Santos</div><span class="rating" data-i="star" data-s="16">4.8 <span>(64)</span></span></div><div class="price-block"><span class="t-sec">Quote</span><span class="t-title">$640.00</span></div></div>
+    <div class="facts"><span class="meta"><span data-i="calendar" data-s="18"></span>Fri, 1–3 PM</span></div>
+    <button class="btn btn-secondary md">See Maria's quote</button>
+   </div>
+   <div class="card">
+    <div class="pro-head"><span class="avatar lg">MT</span><div class="p-text"><b>Mike Torres</b> <span data-i="badge-check" data-s="18" style="color:var(--icon-brand);vertical-align:-3px" role="img" aria-label="Verified"></span><div class="t-sec">Torres Home Repair</div><span class="rating" data-i="star" data-s="16">4.9 <span>(126)</span></span></div><div class="price-block"><span class="t-sec">Quote</span><span class="t-title">$680.79</span></div></div>
+    <div class="facts"><span class="meta"><span data-i="file" data-s="18"></span>ROC licensed</span><span class="meta"><span data-i="calendar" data-s="18"></span>Tomorrow, 8–10 AM</span></div>
+    <button class="btn btn-secondary md">See Mike's quote</button>
+   </div>
+  </div><div class="spec-note">Quotes stack as cards with outline buttons only; the navy "Choose Maria" lives on her quote screen, so each screen still has one main button. Sort by lowest price, highest rating or soonest. The price drops under the name when text is large. Long names wrap.</div></div>
+  <div class="spec"><div class="spec-head">New job request (pro) <small>new</small></div><div class="spec-body m">
+   <div class="req-head urgent"><div class="rh-top"><span data-i="bell" data-s="22"></span><span class="tag onfill" data-i="clock" data-s="16">Urgent</span></div><div class="t-small" style="font-weight:700">New public job</div><div class="t-h2" style="color:inherit">Water heater replacement</div><div style="font-weight:600">Tempe · 4.2 mi from you</div></div>
+   <div><span class="t-sec">You receive</span><div class="t-display">$1,406</div><span class="t-sec">after the 5% MIH fee on $1,480</span></div>
+   <button class="btn btn-primary">Send a quote</button><button class="btn btn-text md">Not for me</button>
+   <div class="req-head emergency"><div class="rh-top"><span data-i="siren" data-s="22"></span><span class="tag onfill" data-i="siren" data-s="16">Emergency</span></div><div class="t-h3" style="color:inherit">Burst pipe under the kitchen</div><div style="font-weight:600">Mesa · 2.1 mi · needs a pro within 2 hours</div></div>
+  </div><div class="spec-note">The one bold colour block in the app: amber with dark text for Urgent, navy for standard, red for Emergency.</div></div>
+  <div class="spec"><div class="spec-head">Job timeline <small>kept</small></div><div class="spec-body m">
+   <ol class="timeline">
+    <li class="done"><span class="mk" data-i="check" data-s="14"></span><div><b>Requested</b><div class="t-sec">Mon, Sep 22</div></div></li>
+    <li class="done"><span class="mk" data-i="check" data-s="14"></span><div><b>Estimate accepted</b><div class="t-sec">$680.79 from Mike</div></div></li>
+    <li class="done"><span class="mk" data-i="check" data-s="14"></span><div><b>Price changed, approved</b><div class="change"><span data-i="pencil" data-s="16"></span>$680.79 → $850.79, more labor</div></div></li>
+    <li class="now" aria-current="step"><span class="mk"></span><div><b>Scheduled</b><div class="t-sec">Thu, Oct 2 · 8–10 AM</div></div></li>
+    <li class="todo"><span class="mk"></span><div><b>On the way</b></div></li>
+    <li class="todo"><span class="mk"></span><div><b>Done and paid</b></div></li>
+   </ol>
+  </div><div class="spec-note">Changes are written on the step with an icon: rescheduled, price changed, pro changed.</div></div>
+  <div class="spec"><div class="spec-head">Slot picker <small>kept</small></div><div class="spec-body m">
+   <div class="days" role="radiogroup" aria-label="Day"><div class="day" role="radio" aria-checked="false" tabindex="-1"><span>Thu</span><b>2</b><span class="t-small">Today</span></div><div class="day is-selected" role="radio" aria-checked="true" tabindex="0"><span>Fri</span><b>3</b><span class="t-small">2 left</span></div><div class="day is-full" role="radio" aria-checked="false" aria-disabled="true" tabindex="-1"><span>Sat</span><b>4</b><span class="t-small">Full</span></div><div class="day" role="radio" aria-checked="false" tabindex="-1"><span>Mon</span><b>6</b><span class="t-small">Open</span></div></div>
+   <span class="t-title">Morning</span>
+   <div class="slots" role="radiogroup" aria-label="Arrival window"><button class="slot is-selected" role="radio" aria-checked="true"><b>8–10 AM</b><span class="t-small">2 left</span></button><button class="slot is-full" role="radio" aria-checked="false" aria-disabled="true"><b>10 AM–12 PM</b><span class="t-small">Full</span></button></div>
+  </div><div class="spec-note">Full days and slots stay visible, struck through, with the word "Full".</div></div>
+  <div class="spec"><div class="spec-head">Pro tracker <small>kept</small></div><div class="spec-body m">
+   <div class="map" role="img" aria-label="Map: Mike is 10 minutes away"><svg class="route" viewBox="0 0 320 132" aria-hidden="true"><path d="M0 40h320M0 96h320M80 0v132M220 0v132" stroke="#fff" stroke-width="10"/><path d="M40 96h40V40h140v56h50" fill="none" stroke="var(--icon-brand)" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="80" cy="40" r="10" fill="var(--icon-brand)" stroke="#fff" stroke-width="3"/><circle cx="270" cy="96" r="10" fill="#fff" stroke="var(--text-brand)" stroke-width="3"/></svg></div>
+   <div class="pro-head"><span class="avatar lg">MT</span><div class="p-text"><div class="t-h3">Mike is 10 min away</div><div class="t-sec">Arriving about 8:42 AM · White Ford Transit</div></div></div>
+   <div class="btn-row"><button class="btn btn-secondary md" data-i="phone" data-s="20">Call</button><button class="btn btn-secondary md" data-i="msg" data-s="20">Message</button></div>
+   <hr class="divider">
+   <span class="tag attn-warning" data-i="clock" data-s="16" style="align-self:flex-start">Running late</span><div class="t-h3">Mike is running late</div><div class="t-sec">Arriving about 9:05 AM (was 8:42)</div><div class="meta"><span data-i="msg" data-s="18"></span>"Stuck behind a crash on I-10. Be there by 9:05."</div>
+  </div><div class="spec-note">Everything on the map is also said in words. Late: an attention tag "Running late", the new time and the pro's note.</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Photos, AI and conversation</h3><div class="board">
+  <div class="spec"><div class="spec-head">Show us / photo uploader <small>kept + capture choice</small></div><div class="spec-body m">
+   <div class="capture"><button class="big"><span class="ic" data-i="video" data-s="26"></span><span><span class="t-title" style="display:block">Video walkthrough</span>Walk and talk. We do the rest.</span></button><button class="small"><span data-i="camera" data-s="26"></span>Take photos</button><button class="small"><span data-i="mic" data-s="26"></span>Just talk</button></div>
+   <div class="alert warning"><span data-i="alert" data-s="24"></span><div class="a-body"><b>1 photo hasn't uploaded</b>You can continue. It uploads when you're back online.</div></div>
+   <div class="photos"><div class="ph"><button class="rm" aria-label="Remove photo" data-i="x" data-s="20"></button><span class="pl">Under the sink</span></div><div class="ph"><div class="bar"><i style="width:62%"></i></div><span class="pl" style="margin-top:6px">62%</span></div><button class="ph failed"><span data-i="alert" data-s="20"></span>Didn't upload<u>Tap to retry</u></button><div class="ph waiting"><span data-i="wifi-off" data-s="20"></span>Waiting for signal</div><button class="ph add"><span data-i="image-plus" data-s="26"></span>Add another</button></div>
+  </div><div class="spec-note">Each photo shows its own state; nothing is lost on a bad connection. Continue is allowed once one photo is done or queued.</div></div>
+  <div class="spec"><div class="spec-head">AI analysis and confirm <small>new</small></div><div class="spec-body m">
+   <div class="t-h2">Building your estimate…</div>
+   <div class="meter" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" aria-label="75% done"><i style="width:75%"></i></div>
+   <ul class="steps-check"><li class="done"><span data-i="circle-check" data-s="24"></span>Watched your video</li><li class="done"><span data-i="circle-check" data-s="24"></span>Checked Phoenix-area prices</li><li class="now"><span data-i="loader" data-s="24" class="spin"></span>Putting your price together</li></ul>
+   <hr class="divider">
+   <div class="card"><span class="t-sec">Looks like</span><span class="t-h3">Water heater replacement</span><span class="tag calm active" style="align-self:flex-start">Plumbing</span><p class="t-sec">"Leaking tank in the garage, about 12 years old."</p></div>
+   <button class="btn btn-primary">Yes, that's it</button><button class="btn btn-secondary md">Not quite, change it</button>
+  </div><div class="spec-note">Say what is happening in steps, not a spinner alone. Always let people correct what the AI understood before pricing.</div></div>
+  <div class="spec"><div class="spec-head">Chat and rating <small>kept</small></div><div class="spec-body m">
+   <div class="chat" role="log" aria-label="Messages with Mike">
+    <div class="bub them">Hi Linda, is the leak at the base or under the sink?</div>
+    <div class="bub me">Under the sink, near the shut-off valve.</div><span class="when">9:14 AM · Read</span>
+    <div class="sys"><span data-i="file" data-s="18"></span>Mike sent an estimate: $680.79. Review it in the job.</div>
+    <div class="bub me">Friday works. See you then!</div><span class="fail" data-i="alert" data-s="16">Not sent · <button class="btn btn-text" style="padding:0">Try again</button></span>
+   </div>
+   <div class="composer"><button class="icon-btn" aria-label="Add photo" data-i="camera" data-s="22"></button><label class="input"><input aria-label="Message Mike" placeholder="Message Mike"></label><button class="icon-btn" aria-label="Send" data-i="send" data-s="22" style="background:var(--action-primary);color:#fff"></button></div>
+   <hr class="divider">
+   <span class="t-h3">How did Mike do?</span>
+   <div class="stars" role="radiogroup" aria-label="Rating, 4 of 5"><button aria-label="1 star" data-i="star" data-s="32"></button><button aria-label="2 stars" data-i="star" data-s="32"></button><button aria-label="3 stars" data-i="star" data-s="32"></button><button aria-label="4 stars" data-i="star" data-s="32"></button><button class="off" aria-label="5 stars" data-i="star-o" data-s="32"></button></div>
+  </div><div class="spec-note">My messages navy, theirs grey. Prices arrive as a system line linked to the job, never typed in chat. A failed message is never dropped silently.</div></div>
+  <div class="spec"><div class="spec-head">Bottom sheet (confirm) <small>kept</small></div><div class="spec-body m" style="padding:0">
+   <div class="sheet-wrap"><div class="sheet"><span class="grip"></span><span class="t-h3">Cancel this job?</span><p class="t-sec">Mike will be told right away. You can book another pro any time. You won't be charged.</p><button class="btn btn-danger">Yes, cancel job</button><button class="btn btn-text">Keep the job</button></div></div>
+  </div><div class="spec-note">The sheet repeats the consequence in plain words. The safe way out is always there.</div></div>
+ </div></div>
+
+ <div class="cgroup"><h3>Navigation</h3><div class="board">
+  <div class="spec"><div class="spec-head">Tab bar and step progress <small>kept, active cue made stronger</small></div><div class="spec-body m" style="padding:0">
+   <div class="tabbar" role="tablist" aria-label="Pro app"><button class="tab on" role="tab" aria-selected="true"><span class="ti" data-i="home" data-s="24"></span><span class="lb">Home</span></button><button class="tab" role="tab" aria-selected="false"><span class="ti" data-i="msg" data-s="24"><span class="count">2</span></span><span class="lb">Messages</span></button><button class="tab" role="tab" aria-selected="false"><span class="ti" data-i="file-plus" data-s="24"></span><span class="lb">Estimate</span></button><button class="tab" role="tab" aria-selected="false"><span class="ti" data-i="users" data-s="24"></span><span class="lb">Clients</span></button><button class="tab" role="tab" aria-selected="false"><span class="ti" data-i="grid" data-s="24"></span><span class="lb">Menu</span></button></div>
+   <div style="padding:20px;display:flex;flex-direction:column;gap:8px"><span class="field-label t-sec">Step 2 of 3 · Logistics</span><div class="steps" role="img" aria-label="Step 2 of 3"><i class="on"></i><i class="on"></i><i></i></div></div>
+  </div><div class="spec-note">Active tab: navy icon and label, bold, and a 4px navy bar. No raised centre button. Tab labels and unread counts are 14, the one exception to the 15 minimum, because five tabs share 360. Customer tabs: Home, Messages, Request, Invoices, Menu.</div></div>
+ </div></div>
+</section>
+
+<section id="screens">
+ <h2>In a screen</h2>
+ <p class="sub">System checks for both roles and both platforms; try the text-size switch above. The full 7–8 flow screens come next.</p>
+ <div class="phones">
+  <div><p class="phone-cap">Pro · Create estimate, step 2 of 3</p>
+  <div class="phone m">
+   <div class="status-bar"><span>9:41</span><span aria-hidden="true">●●●</span></div>
+   <div class="topbar"><button class="icon-btn plain" aria-label="Back" data-i="chev-left" data-s="28"></button><div class="tb-title">Create estimate</div><span class="tb-spacer"></span></div>
+   <div class="screen">
+    <div><div class="field-label t-sec" style="margin-bottom:8px">Step 2 of 3</div><div class="steps"><i class="on"></i><i class="on"></i><i></i></div></div>
+    <div class="t-h1">Logistics</div>
+    <div class="field"><span class="field-label">Who supplies materials?</span><div class="seg" role="group" aria-label="Who supplies materials"><button aria-pressed="true">I'll supply</button><button aria-pressed="false">Client</button></div></div>
+    <div class="field" role="radiogroup" aria-labelledby="hs"><span class="field-label" id="hs">How soon?</span>
+     <div class="choice is-selected" role="radio" aria-checked="true" tabindex="0"><span class="dot"></span><span class="opt-text"><b>Standard</b><span class="t-sec">In the next few days</span></span></div>
+     <div class="choice" role="radio" aria-checked="false" tabindex="-1"><span class="dot"></span><span class="opt-text"><b>Urgent</b><span class="t-sec">Today</span></span><span class="meta">Costs more</span></div>
+    </div>
+    <div class="field"><span class="field-label" id="zip">Job ZIP code</span><label class="input"><input aria-labelledby="zip" placeholder="e.g. 85281" inputmode="numeric"></label></div>
+   </div>
+   <div class="sticky"><button class="btn btn-primary">Continue</button></div>
+   <div class="home-ind" aria-hidden="true"></div>
+  </div></div>
+
+  <div><p class="phone-cap">Customer · Estimate received</p>
+  <div class="phone m">
+   <div class="status-bar"><span>9:41</span><span aria-hidden="true">●●●</span></div>
+   <div class="topbar"><button class="icon-btn plain" aria-label="Back" data-i="chev-left" data-s="28"></button><div class="tb-title">Your estimate</div><span class="tb-spacer"></span></div>
+   <div class="screen">
+    <div class="pro-head"><span class="avatar md">MT</span><div class="p-text"><b>Mike Torres</b><div><span class="rating" data-i="star" data-s="16">4.9 <span>(126)</span></span> <span class="t-sec">· Licensed</span></div></div></div>
+    <div><div class="t-sec">Wall repair, living room</div><div class="t-display">$680.79</div><span class="tag attn-warning" data-i="alert" data-s="16">Your reply needed</span></div>
+    <div class="card tight">
+     <div class="line"><div class="l-text"><b>Labor</b><span class="t-sec">7 hrs × $85</span></div><div class="amt">$595.00</div></div>
+     <div class="line"><div class="l-text"><b>Materials</b><span class="t-sec">3 items, incl. tax</span></div><div class="amt">$85.79</div></div>
+    </div>
+    <button class="btn btn-text" style="justify-content:flex-start;padding:0">See every line</button>
+   </div>
+   <div class="sticky"><button class="btn btn-primary">Accept $680.79</button><button class="btn btn-secondary md">Request changes</button><button class="btn btn-text md">Decline</button></div>
+   <div class="home-ind" aria-hidden="true"></div>
+  </div></div>
+  <div><p class="phone-cap">Customer · Estimate received (Android)</p>
+  <div class="phone m">
+   <div class="status-bar"><span>9:41</span><span aria-hidden="true">●●●</span></div>
+   <div class="topbar android"><button class="icon-btn plain" aria-label="Back" data-i="arrow-left" data-s="24"></button><div class="tb-title">Your estimate</div><button class="icon-btn plain" aria-label="More" data-i="more" data-s="24"></button></div>
+   <div class="screen">
+    <div class="pro-head"><span class="avatar md">MT</span><div class="p-text"><b>Mike Torres</b><div><span class="rating" data-i="star" data-s="16">4.9 <span>(126)</span></span> <span class="t-sec">· Licensed</span></div></div></div>
+    <div><div class="t-sec">Wall repair, living room</div><div class="t-display">$680.79</div><span class="tag attn-warning" data-i="alert" data-s="16">Your reply needed</span></div>
+    <div class="card tight">
+     <div class="line"><div class="l-text"><b>Labor</b><span class="t-sec">7 hrs × $85</span></div><div class="amt">$595.00</div></div>
+     <div class="line"><div class="l-text"><b>Materials</b><span class="t-sec">3 items, incl. tax</span></div><div class="amt">$85.79</div></div>
+    </div>
+    <button class="btn btn-text" style="justify-content:flex-start;padding:0">See every line</button>
+   </div>
+   <div class="sticky"><button class="btn btn-primary">Accept $680.79</button><button class="btn btn-secondary md">Request changes</button><button class="btn btn-text md">Decline</button></div>
+   <div style="height:16px" aria-hidden="true"></div>
+  </div></div>
+ </div>
+</section>
+
+<section id="v3">
+ <h2>From v3: what happened to each component</h2>
+ <p class="sub">All 38 v3 pages were rendered and read. Nothing was dropped without a reason.</p>
+ <div class="scroll" tabindex="0" role="region" aria-label="v3 to v4 components table"><table class="t"><thead><tr><th>v3 component</th><th>In v4.2</th><th>What changed</th></tr></thead><tbody id="v3Table"></tbody></table></div>
+ <h3>What changed in the foundations</h3>
+ <div class="scroll" tabindex="0" role="region" aria-label="Changes from v3 table"><table class="t"><thead><tr><th>Area</th><th>v3</th><th>v4.2</th><th>Why</th></tr></thead><tbody>
+  <tr><td>Primary button</td><td>Blue #1747B0, 8.19:1</td><td>Navy #14213D, 15.97:1</td><td>Client's colour; strongest in sun.</td></tr>
+  <tr><td>Secondary button</td><td>Grey fill, 1.15:1 against the page</td><td>White with a 2px navy outline</td><td>The grey button disappeared in sunlight.</td></tr>
+  <tr><td>Status</td><td>Calm / attention recipe; attention text 5.21:1</td><td>Same recipe; every text 7:1+; Urgent is solid amber</td><td>Kept what worked, made it AAA and bolder.</td></tr>
+  <tr><td>Urgent colour</td><td>Amber tint, brown text</td><td>#FF9500 with near-black text, 7.99:1</td><td>Rich and AAA at the same time.</td></tr>
+  <tr><td>Destructive, placeholder, input edge</td><td>6.05 · 5.61 · 3.41:1</td><td>7.59 · 7.61 · 5.95:1</td><td>AAA and visible in glare.</td></tr>
+  <tr><td>Rating star</td><td>Gold, 2.30:1</td><td>Amber-500: 4.6:1 on white, 4.2:1 on a card</td><td>Visible outdoors.</td></tr>
+  <tr><td>Type</td><td>16 × 1.2, with 18 and 14 fixed off-scale, 12 captions</td><td>17 × 1.15ⁿ, smallest 15, ratio line heights, per-style growth caps</td><td>One rule, bigger base, phone-sized headings.</td></tr>
+  <tr><td>Cards</td><td>White with hairlines</td><td>Flat grey #F2F4F7</td><td>Client's choice; groups content without borders or shadows.</td></tr>
+  <tr><td>Platforms</td><td>One pattern</td><td>iOS and Android top bars, light-only settings, keyboard types</td><td>Native feel on both.</td></tr>
+ </tbody></table></div>
+ <p class="sub">Measured with the same script, v3 fails 9 of its 35 pairs at AAA: 5 text pairs below 7:1 and 4 lines or icons below WCAG's 3:1. At v4's stricter 4.5:1 line for control edges and icons, 5 more fail.</p>
+</section>
+
+<section id="sources">
+ <h2>Research</h2>
+ <p class="sub">Pages opened on September 30, 2026.</p>
+ <div class="scroll" tabindex="0" role="region" aria-label="Research sources table"><table class="t"><thead><tr><th>Source</th><th>Finding</th><th>What we did with it</th></tr></thead><tbody>
+  <tr><td><a href="https://thumbprint.design/guidelines/color/palette">Thumbtack (Thumbprint)</a></td><td>Primary blue #009FD9 (3.02:1 on white, measured); own "Rise" font; body 16; buttons 40 / 52.</td><td>Even the category leader's brand colour isn't AAA as text; we keep brand colours for fills and shapes.</td></tr>
+  <tr><td><a href="https://atlantis.getjobber.com/foundation.css">Jobber (Atlantis)</a></td><td>Inter for body; base 14; buttons 32–48.</td><td>Inter is proven in field-service apps; we go bigger for older customers.</td></tr>
+  <tr><td><a href="https://www.taskrabbit.com/">TaskRabbit</a></td><td>Inter, body 16.</td><td>Second verified Inter user.</td></tr>
+  <tr><td><a href="https://www.housecallpro.com/">Housecall Pro</a></td><td>Plus Jakarta Sans; dark blue #0E2634 and blue #0065C1.</td><td>Navy-and-blue is familiar in the trade; Plus Jakarta Sans shown in the font comparison.</td></tr>
+  <tr><td><a href="https://help.getjobber.com/hc/en-us/articles/115012715008-Quote-Approvals">Jobber quote approvals</a> · <a href="https://www.housecallpro.com/general-contractor/templates-calculators/free-change-order-template/">Housecall Pro change orders</a></td><td>Approve / Request changes / Decline; change orders list what changed, why, and the new cost.</td><td>The estimate, change and sticky-bar patterns.</td></tr>
+  <tr><td><a href="https://developer.apple.com/design/human-interface-guidelines/typography">Apple HIG, typography</a></td><td>Default sizes: Body 17, Subhead 15, Title 3 20, Title 2 22, Title 1 28, Large Title 34.</td><td>Base 17; the ×1.15 scale meets 15, 17, 20, 22 and 34.</td></tr>
+  <tr><td><a href="https://developer.apple.com/design/human-interface-guidelines/accessibility">Apple HIG, accessibility</a> · <a href="https://developer.android.com/guide/topics/ui/accessibility/apps">Android</a></td><td>Tap targets 44pt (iOS) and at least 48dp (Android).</td><td>48 minimum on both.</td></tr>
+  <tr><td><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7330495/">Font size and older adults (PMC7330495)</a></td><td>32 adults 65+ vs 32 aged 18–35 operating a device with 10/14/18/22 pt text: the older group matched the younger group's time only at 22 pt.</td><td>Evidence that bigger is better for older users; it doesn't set a minimum, so our floor of 15 is a judgement, with 17 for reading.</td></tr>
+  <tr><td><a href="https://www.nngroup.com/articles/usability-for-senior-citizens/">NN/g, older users</a></td><td>Text is "often too small and lightly colored" for older adults.</td><td>Dark text only, no light greys.</td></tr>
+  <tr><td><a href="https://developer.apple.com/design/human-interface-guidelines/color">Apple HIG, colour</a></td><td>"In bright surroundings, colors look darker and more muted."</td><td>AAA by default rather than an optional high-contrast mode.</td></tr>
+  <tr><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/contrast-enhanced.html">WCAG 2.2, 1.4.6</a> · <a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">1.4.11</a></td><td>AAA text 7:1 (4.5:1 large). Non-text 3:1, with no AAA level.</td><td>All text 7:1; control edges and meaningful icons 4.5:1.</td></tr>
+ </tbody></table></div>
+</section>
+
+</main>
+
+<script>
+(function(){
+ const M = window.MIH, P = M.tokens.color.primitive, H = M.semanticHex;
+ // Lucide icons (ISC licence), 24 grid, 2px stroke
+ const I = {
+  check:'<path d="M20 6 9 17l-5-5"/>', chev:'<path d="m9 18 6-6-6-6"/>', 'chev-left':'<path d="m15 18-6-6 6-6"/>', 'arrow-left':'<path d="m12 19-7-7 7-7"/><path d="M19 12H5"/>',
+  more:'<circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/>',
+  alert:'<path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/><path d="M12 9v4"/><path d="M12 17h.01"/>',
+  clock:'<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+  pin:'<path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"/><circle cx="12" cy="10" r="3"/>',
+  calendar:'<path d="M8 2v4"/><path d="M16 2v4"/><rect width="18" height="18" x="3" y="4" rx="2"/><path d="M3 10h18"/>',
+  home:'<path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"/><path d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>',
+  msg:'<path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/>', plus:'<path d="M5 12h14"/><path d="M12 5v14"/>', minus:'<path d="M5 12h14"/>',
+  file:'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M16 13H8"/><path d="M16 17H8"/>',
+  'file-plus':'<path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M9 15h6"/><path d="M12 18v-6"/>',
+  user:'<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+  users:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  'user-x':'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="m17 8 5 5"/><path d="m22 8-5 5"/>',
+  star:'<path fill="currentColor" d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>',
+  'star-o':'<path d="M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"/>',
+  wrench:'<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  info:'<circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/>',
+  'circle-check':'<circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/>',
+  'circle-x':'<circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/>', x:'<path d="M18 6 6 18"/><path d="m6 6 12 12"/>',
+  zap:'<path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>',
+  grid:'<rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/>',
+  siren:'<path d="M7 18v-6a5 5 0 1 1 10 0v6"/><path d="M5 21a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2z"/><path d="M21 12h1"/><path d="M18.5 4.5 18 5"/><path d="M2 12h1"/><path d="M12 2v1"/><path d="m4.929 4.929.707.707"/><path d="M12 12v6"/>',
+  camera:'<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>',
+  'image-plus':'<path d="M16 5h6"/><path d="M19 2v6"/><path d="M21 11.5V19a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7.5"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/><circle cx="9" cy="9" r="2"/>',
+  video:'<path d="m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5"/><rect x="2" y="6" width="14" height="12" rx="2"/>',
+  mic:'<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/>',
+  trash:'<path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/>',
+  send:'<path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"/><path d="m21.854 2.147-10.94 10.939"/>',
+  phone:'<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  lock:'<rect width="18" height="11" x="3" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+  card:'<rect width="20" height="14" x="2" y="5" rx="2"/><path d="M2 10h20"/>',
+  'wifi-off':'<path d="M12 20h.01"/><path d="M8.5 16.429a5 5 0 0 1 7 0"/><path d="M5 12.859a10 10 0 0 1 5.17-2.69"/><path d="M19 12.859a10 10 0 0 0-2.007-1.523"/><path d="M2 8.82a15 15 0 0 1 4.177-2.643"/><path d="M22 8.82a15 15 0 0 0-11.288-3.764"/><path d="m2 2 20 20"/>',
+  retry:'<path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/>',
+  globe:'<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+  shield:'<path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/>',
+  'badge-check':'<path d="M3.85 8.62a4 4 0 0 1 4.78-4.77 4 4 0 0 1 6.74 0 4 4 0 0 1 4.78 4.78 4 4 0 0 1 0 6.74 4 4 0 0 1-4.77 4.78 4 4 0 0 1-6.75 0 4 4 0 0 1-4.78-4.77 4 4 0 0 1 0-6.76Z"/><path d="m9 12 2 2 4-4"/>',
+  droplet:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/>',
+  hammer:'<path d="m15 12-8.373 8.373a1 1 0 1 1-3-3L12 9"/><path d="m18 15 4-4"/><path d="m21.5 11.5-1.914-1.914A2 2 0 0 1 19 8.172V7l-2.26-2.26a6 6 0 0 0-4.202-1.756L9 2.96l.92.82A6.18 6.18 0 0 1 12 8.4V10l2 2h1.172a2 2 0 0 1 1.414.586L18.5 14.5"/>',
+  wind:'<path d="M12.8 19.6A2 2 0 1 0 14 16H2"/><path d="M17.5 8a2.5 2.5 0 1 1 2 4H2"/><path d="M9.8 4.4A2 2 0 1 1 11 8H2"/>',
+  bell:'<path d="M10.268 21a2 2 0 0 0 3.464 0"/><path d="M3.262 15.326A1 1 0 0 0 4 17h16a1 1 0 0 0 .74-1.673C19.41 13.956 18 12.499 18 8A6 6 0 0 0 6 8c0 4.499-1.411 5.956-2.738 7.326"/>',
+  search:'<circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>',
+  pencil:'<path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/>',
+  loader:'<path d="M21 12a9 9 0 1 1-6.219-8.56"/>',
+  sort:'<path d="m3 16 4 4 4-4"/><path d="M7 20V4"/><path d="m21 8-4-4-4 4"/><path d="M17 4v16"/>'
+ };
+ const svg=(n,s)=>`<svg width="${s}" height="${s}" style="width:calc(${s}px * min(var(--ts),1.5));height:calc(${s}px * min(var(--ts),1.5))" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]||''}</svg>`;
+ document.querySelectorAll('[data-i]').forEach(el=>el.insertAdjacentHTML('afterbegin', svg(el.dataset.i, el.dataset.s||24)));
+
+ // text-size preview
+ document.querySelectorAll('.ts-ctl button').forEach(b=>b.addEventListener('click',()=>{
+  document.documentElement.style.setProperty('--ts', b.dataset.ts);
+  document.querySelectorAll('.ts-ctl button').forEach(x=>x.setAttribute('aria-pressed', x===b));
+ }));
+
+ const pass = M.checks.filter(c=>c.ratio>=c.need).length;
+ document.getElementById('brandRow').innerHTML = [
+  ['Navy','navy','Main buttons, screen titles, toasts, navy headers','#fff'],['Urgent amber','amber-400','Urgent tag and job-request header, with dark text',H['text-primary']],['White','white','Every page',H['text-primary']],['Card grey','ink-50','Cards, tiles, grouped content',H['text-primary']]
+ ].map(([n,k,u,fg])=>`<div class="brand-sw" style="background:${P[k]};color:${fg}"><b>${n}</b><div>${P[k]}<br>${u}</div></div>`).join('');
+
+ const steps=[50,100,200,300,400,500,600,700,800,900,950];
+ document.getElementById('ramps').innerHTML = ['blue','ink','green','amber','red'].map(f=>
+  `<div class="ramp-name"><b>${f[0].toUpperCase()+f.slice(1)}</b><span>${M.families[f]}</span></div><div class="ramp">`+
+  steps.map(s=>{const h=P[`${f}-${s}`];return `<div class="sw"><i style="background:${h}"></i>${s}<small>${h}<br>${M.vsWhite[f+'-'+s]}:1</small></div>`}).join('')+'</div>').join('');
+
+ const use={'bg-page':'Every screen','bg-card':'Cards, tiles','bg-card-pressed':'Pressed row or card','bg-input':'Inputs (always white)','bg-selected':'Selected tile, day, slot','bg-inverse':'Toasts, navy headers, my chat bubbles','bg-changed':'A changed estimate line',
+  'text-primary':'Headings and reading text','text-secondary':'Meta lines, helper text','text-placeholder':'Input placeholders','text-brand':'Screen titles, prices','text-link':'Links, text buttons (underlined), selected chip text','text-on-color':'Text on navy and red','text-on-urgent':'Text on amber',
+  'text-success':'Success titles, discounts','text-warning':'Attention titles and tags','text-danger':'Errors, danger titles','text-info':'Info titles',
+  'action-primary':'Main button','action-primary-pressed':'Main button pressed (lighter)','action-secondary-border':'Outline button edge','action-secondary-text':'Outline button label','action-secondary-pressed':'Outline button pressed','action-destructive':'Confirm cancel / delete','action-destructive-pressed':'Pressed','action-disabled':'Disabled fill','text-disabled':'Disabled label (exempt)',
+  'border-divider':'Hairlines (decorative)','border-tile':'Faint edge on tappable grey tiles (decorative)','border-input':'Inputs, radios, checkboxes, chips','border-selected':'Selected edge, checked box, switch on','border-focus':'Focus ring','border-error':'Input in error',
+  'icon-default':'Icons in rows and meta','icon-muted':'Chevrons','icon-brand':'Brand icons, verified, timeline','icon-success':'Success icons','icon-warning':'Attention icons','icon-danger':'Danger icons','icon-rating':'Rating star',
+  'progress-fill':'Progress bar','progress-track':'Progress track','tab-active':'Active tab','tab-inactive':'Inactive tabs',
+  'status-calm-bg':'Calm status badge','dot-waiting':'Dot: waiting on someone','dot-active':'Dot: sent, scheduled, in progress','dot-done':'Dot: completed, paid','dot-stopped':'Dot: draft, cancelled','dot-problem':'Dot: problem',
+  'status-warning-soft':'Attention tint','status-warning-border':'Attention hairline','status-danger-soft':'Danger tint','status-danger-border':'Danger hairline','status-success-soft':'Success tint','status-info-soft':'Info tint','status-urgent-solid':'Urgent fill (dark text)','status-emergency-solid':'Emergency fill (white text)'};
+ const sem=M.tokens.color.semantic;
+ document.querySelector('#semTable tbody').innerHTML=Object.keys(sem).map(k=>`<tr><td><code>${k}</code></td><td>${sem[k].replace(/[{}]/g,'')}</td><td><span class="chip-sw" style="background:${H[k]}"></span>${H[k]}</td><td>${use[k]||''}</td></tr>`).join('');
+
+ document.getElementById('contrastLead').innerHTML=`<b>${pass} of ${M.checks.length}</b> pairs pass, computed with the WCAG 2.2 formula by <code>build/build_tokens.py</code>. Text needs 7:1 on every surface it can sit on: white, a grey card, a selected tile and a changed line. Control edges and meaningful icons need 4.5:1 (WCAG asks 3:1). Status dots and the rating star need 3:1; the word or number next to them carries the meaning.`;
+ document.querySelector('#checkTable tbody').innerHTML=M.checks.map(c=>`<tr><td>${c.use}<br><span style="color:var(--text-secondary);font-size:15px">${c.fg} on ${c.bg}</span></td><td><span style="display:inline-flex;align-items:center;justify-content:center;min-width:64px;height:36px;padding:0 10px;border-radius:8px;background:${c.bgHex};color:${c.fgHex};font-weight:700;border:1px solid ${P['ink-200']}">${c.need>=7?'Aa':'<svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><rect x="2" y="2" width="18" height="18" rx="4" fill="none" stroke="currentColor" stroke-width="3"/></svg>'}</span></td><td><b>${c.ratio.toFixed(2)}:1</b></td><td>${c.need}:1</td><td class="${c.ratio>=c.need?'pass':'fail'}">${c.ratio>=c.need?'Pass':'Fail'}</td></tr>`).join('');
+
+ const T=M.tokens.type.scale;
+ document.querySelector('#typeTable tbody').innerHTML=Object.entries(T).map(([k,t])=>`<tr><td><code>${k}</code></td><td>${t.multiplier.replace('x','×')}</td><td>${t.exact}</td><td><b>${t.size} / ${t.lineHeightPx}</b></td><td>${t.weight}</td><td>${t.maxScale*100}%</td><td>${t.use}</td></tr>`).join('');
+ const sample={display:'$1,480',h1:'What needs fixing?',h2:'How soon do you need it?',h3:'What we will do',title:'Water heater replacement',label:'Labor hours',body:'Drain and remove the old heater, then install the new 50-gallon unit to code.',small:'Sent 2:14 PM · Estimate #1042'};
+ document.getElementById('typeSpec').innerHTML=Object.entries(T).reverse().map(([k,t])=>`<div class="type-row"><div class="tmeta"><b>${k}</b>${t.size}/${t.lineHeightPx} · ${t.weight}</div><div class="m" style="font-size:${t.size}px;line-height:${t.lineHeight};font-weight:${t.weight};letter-spacing:${t.letterSpacing};color:${['display','h1','h2'].includes(k)?H['text-brand']:H['text-primary']}">${sample[k]}</div></div>`).join('');
+ document.getElementById('fontCompare').innerHTML=[['Inter · recommended','Inter'],['Plus Jakarta Sans · Housecall Pro, the concept',"'Plus Jakarta Sans'"],['Roboto · Android system font','Roboto']].map(([n,f])=>
+  `<div class="font-card"><div class="fname">${n}</div><div style="font-family:${f};font-weight:800;font-size:30px;line-height:1.2;color:${H['text-brand']}">$1,406.50</div><div style="font-family:${f};font-weight:700;font-size:20px;margin:6px 0">Water heater replacement</div><div style="font-family:${f};font-size:17px;line-height:1.5">Labor 7 hrs × $85. Il1 0O 5S 8B. Arriving Thu 8–10 AM.</div></div>`).join('');
+
+ document.getElementById('spaceRows').innerHTML=Object.entries(M.tokens.space).map(([k,v])=>`<div class="space-row"><span>${k}</span><div class="space-bar" style="width:${v*3}px"></div><b>${v}</b></div>`).join('');
+ const rUse={sm:'Tags',md:'Inputs, alerts, tiles, photos',lg:'Cards, choice tiles',xl:'Bottom-sheet top',pill:'Buttons, chips, segmented'};
+ document.getElementById('radiusRow').innerHTML=Object.entries(M.tokens.radius).map(([k,v])=>`<div><div class="radius-box" style="border-radius:${Math.min(v,40)}px">${v===999?'pill':v}</div><div style="margin-top:6px;color:var(--text-secondary);font-size:15px;max-width:112px">${rUse[k]}</div></div>`).join('');
+
+ const V=[
+  ['Alert','keep','Same calm/attention recipe; titles in shade 800, AAA.'],['Avatar','keep','Same sizes 32/40/56.'],['BottomSheet','keep','Same; destructive confirm lives here.'],
+  ['Button','keep','Navy primary, navy-outline secondary (was grey), red outline then solid red.'],['Card','keep','Flat grey #F2F4F7, no border or shadow.'],['CategoryGrid','keep','Icons 28 on a blue tint, 64 tiles.'],
+  ['ChatThread','keep','My bubbles navy (15.97:1), failed message with Try again.'],['Checkbox','keep','Checked = blue; also covers Switch.'],['Chip','keep','1.5px edge at 5.95:1 (was a 1.40:1 hairline).'],
+  ['Cover','drop','Documentation page for the v3 artifact, not an app component.'],['EdgeCases','merge','Edge cases now live in each component\'s note (offline, failed upload, wide range, late pro, declined card, long names, 200% text, emergency).'],
+  ['EmptyState','keep','Same writing rules.'],['GetQuoteScreen','merge','Rebuilt as the Show us / photo uploader and the flow screens.'],['HomeScreen','merge','Rebuilt with the flow screens (next step).'],
+  ['Icon','keep','Lucide, now 2px stroke.'],['JobCard','keep','Rows with calm or attention tag and price.'],['JobNudge','keep','Nudge row: "3 pros sent quotes · Compare".'],
+  ['JobTimeline','keep','Adds "price changed, approved" steps.'],['LayoutGrid','merge','Changed: phone only (360, 4 columns, margin 20). The Pro tablet grid returns when a tablet layout is designed.'],['ListRow','keep','Same.'],
+  ['PaymentSummary','keep','Discount with minus sign and green.'],['PhotoUploader','keep','Adds the video / photos / talk capture choice.'],['ProCard','keep','Also the public-job quote comparison.'],
+  ['PromoBanner','drop','Out of scope for the estimate flows; return later with promo tints.'],['ProTracker','keep','Same; late state uses an attention tag.'],['QuoteCard','keep','Instant quote with included / not included.'],
+  ['RadioGroup','keep','List and card (choice tile) variants.'],['RatingInput','keep','48 star targets.'],['SearchBar','keep','Pill input with search icon.'],['Section','keep','H3 section head with See all.'],
+  ['ServiceRow','merge','A nudge row with rating, "From $149" and Get a quote.'],['Skeleton','keep','Stops pulsing with Reduce Motion.'],['SlotPicker','keep','Same; full slots struck through.'],['StepProgress','keep','3 segments for the 3-step pro flow.'],
+  ['StickyBar','keep','Actions stack full width.'],['TabBar','keep','Active tab gets a 4px navy bar; hidden in step flows.'],['Tag','keep','Calm (incl. New) / attention / priority; Urgent now solid amber with dark text.'],['TextField','keep','Whole box takes the tap; textarea and stepper added.'],
+  ['(new)','new','Segmented control, estimate (read and builder), change before start, AI analysis and confirm, job request header, role picker, Android top bar, navy header.']];
+ const lab={keep:'Kept',merge:'Merged',drop:'Dropped',new:'New'};
+ document.getElementById('v3Table').innerHTML=V.map(([n,s,w])=>`<tr><td>${n}</td><td class="st ${s}">${lab[s]}</td><td>${w}</td></tr>`).join('');
+})();
+</script>
+</body>
+</html>

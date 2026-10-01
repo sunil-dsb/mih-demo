@@ -1,0 +1,16 @@
+/* MIH Pros Version 2 (client concept): shared rules. Screen markup keeps its own inline styles. */
+:root{--v2-navy:#14213D;--v2-blue:#115098;--v2-text-2:#3B4A60;--v2-amber:#FF9500;--v2-red:#9E1818}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font-family:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,system-ui,sans-serif;color:#0F1B2D;background:#EAF2FC;-webkit-font-smoothing:antialiased}
+a{color:var(--v2-blue)}
+button{cursor:pointer;color:inherit}
+/* tap sizes: every link, button and checkbox row is at least 48 tall */
+a,button{min-height:48px}
+a:not([style*="display"]){display:inline-flex;align-items:center}
+label:has(input){min-height:48px}
+input[type=checkbox]{width:28px;height:28px;flex:none;accent-color:var(--v2-blue)}
+:focus-visible{outline:3px solid var(--v2-blue);outline-offset:2px}
+/* each screen is exactly one phone tall: never show scrollbars (they appeared at some browser zoom levels) */
+html,body{overflow:hidden;scrollbar-width:none}
+html::-webkit-scrollbar,body::-webkit-scrollbar{display:none}

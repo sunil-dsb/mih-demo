@@ -1,0 +1,1031 @@
+/* Version 1 type: every size is 2px larger than the design-system scale (16 / 18 / 20 / 23 / 26 / 30 / 34), and the heaviest weight is semibold (600). */
+:root{--type-small-size:calc(16px * min(var(--ts),2.0));--type-body-size:calc(18px * min(var(--ts),2.0));--type-label-size:calc(18px * min(var(--ts),2.0));
+  --type-title-size:calc(20px * min(var(--ts),2.0));--type-h3-size:calc(23px * min(var(--ts),1.8));--type-h2-size:calc(26px * min(var(--ts),1.6));
+  --type-h1-size:calc(30px * min(var(--ts),1.5));--type-display-size:calc(34px * min(var(--ts),1.5))}
+.m b,.m strong{font-weight:600}
+/* MIH Pros app UI, v5 look: modern, calm, bold where it matters.
+   Uses only ../tokens/tokens.css. Type: 16 x 1.15^n (14/16/18/21/24/28/32). */
+
+.m{font-family:Inter,-apple-system,"SF Pro Text",Roboto,system-ui,sans-serif;color:var(--text-primary);
+  font-size:var(--type-body-size);line-height:var(--type-body-lh);font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.006em}
+.m *,.m *::before,.m *::after{box-sizing:border-box}
+.m svg{flex:none}
+:where(.m) button{font:inherit;color:inherit}
+.m p{margin:0}
+
+/* type roles */
+
+.t-title{font-size:var(--type-title-size);line-height:var(--type-title-lh);font-weight:600;letter-spacing:var(--type-title-tracking)}
+
+.t-h1{text-wrap:balance;font-size:var(--type-h1-size);line-height:var(--type-h1-lh);font-weight:600;letter-spacing:var(--type-h1-tracking);color:var(--text-brand)}
+.t-display{font-size:var(--type-display-size);line-height:var(--type-display-lh);font-weight:600;letter-spacing:var(--type-display-tracking);color:var(--text-brand)}
+.t-sec{color:var(--text-secondary)}
+
+/* screen content: the body scrolls inside the phone (device.css draws the phone) */
+.body{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;padding:4px 20px 24px;gap:20px}
+.body::-webkit-scrollbar{display:none}
+.body>*{flex-shrink:0} /* children keep their height; the body scrolls instead of squashing them */
+
+/* nav bar: back + title/step */
+.nav{min-height:52px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:4px;padding:0 8px}
+
+.ib{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:none;border:0;color:var(--text-brand);cursor:pointer;flex:none}
+.ib.soft{background:var(--bg-card)}
+
+/* headings block */
+
+/* buttons */
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;min-height:56px;padding:8px 24px;border-radius:var(--r-btn,16px);border:0;
+  font-weight:600;font-size:var(--type-title-size);line-height:1.25;cursor:pointer;text-align:center}
+
+.btn-primary{background:var(--action-primary);color:var(--text-on-color)}
+.btn-primary:active{background:var(--action-primary-pressed)}
+.btn-tonal{background:var(--action-tonal);color:var(--action-tonal-text)}
+.btn-tonal:active{background:var(--action-tonal-pressed)}
+.btn-text{background:none;color:var(--text-link);min-height:48px;width:auto;padding:0 8px;font-weight:600;font-size:var(--type-label-size)}
+.btn:focus-visible,.ib:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+
+/* fields */
+.field{display:flex;flex-direction:column;gap:8px}
+.lbl{font-weight:600;font-size:var(--type-label-size);line-height:var(--type-label-lh)}
+.input{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 16px;background:var(--bg-input);border:1px solid var(--border-input);border-radius:14px;cursor:text}
+.input input,.input textarea{border:0;outline:0;font:inherit;color:var(--text-primary);flex:1;min-width:0;width:100%;background:transparent;padding:0}
+.input textarea{resize:none;min-height:calc(var(--type-body-size) * 1.5 * 3);field-sizing:content;line-height:1.5}
+.input input::placeholder,.input textarea::placeholder{color:var(--text-placeholder);opacity:1}
+.input:focus-within{border:2px solid var(--border-focus);padding:9px 15px}
+
+.input.top{align-items:flex-start}
+.help{color:var(--text-secondary);font-size:var(--type-small-size);line-height:var(--type-small-lh)}
+
+/* picker row (client, trade, address): tappable, white, 1px edge */
+
+/* options (radio list): white cards, radio on the right */
+
+/* segmented */
+
+/* badges: v3 recipe (calm / attention / emergency), AAA text */
+.bdg{display:inline-flex;align-items:center;gap:6px;min-height:26px;padding:2px 9px;border-radius:8px;font-size:var(--type-small-size);line-height:1.3;font-weight:500}
+
+.bdg.done{--dot:var(--dot-done)}
+.bdg.warn{background:var(--status-warning-soft);box-shadow:inset 0 0 0 1px var(--status-warning-border);color:var(--text-warning)}
+.bdg.warn svg{color:var(--icon-warning)}
+
+.bdg.emergency{background:var(--status-emergency-solid);color:var(--text-on-color);font-weight:600}
+
+/* cards and rows */
+
+/* money */
+
+/* editable line */
+
+/* alerts */
+.note{display:flex;gap:12px;padding:14px 16px;border-radius:14px;background:var(--status-info-soft);align-items:flex-start}
+.note svg{color:var(--icon-brand);margin-top:2px}
+.note b{display:block;font-weight:600;color:var(--text-info)}
+.note.warn{background:var(--status-warning-soft);box-shadow:inset 0 0 0 1px var(--status-warning-border)}
+.note.warn svg{color:var(--icon-warning)}.note.warn b{color:var(--text-warning)}
+
+/* capture + photos */
+
+.ph{aspect-ratio:1;border-radius:14px;position:relative;overflow:hidden;background:#B9C4D2}
+
+.ph .rm{position:absolute;top:0;right:0;width:48px;height:48px;border:0;background:none;display:grid;place-items:center;cursor:pointer;color:var(--text-primary)}
+.ph .rm::before{content:"";position:absolute;top:4px;right:4px;width:26px;height:26px;border-radius:50%;background:var(--bg-page)}
+.ph .rm svg{position:absolute;top:10px;right:10px}
+
+/* analysis */
+
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:16px}
+.checks li{display:flex;gap:12px;align-items:center;font-weight:600}
+.checks li.done svg{color:var(--icon-success)}
+.checks li.now svg{color:var(--icon-brand)}
+.checks li.todo{color:var(--text-secondary);font-weight:500}
+.spin{animation:spin 1s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+
+/* sticky bottom */
+.foot{padding:12px 20px 0;display:flex;flex-direction:column;gap:6px;background:var(--bg-page)}
+.foot.line-top{border-top:1px solid var(--border-divider)}
+
+/* tab bar */
+.tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));border-top:1px solid var(--border-divider);padding-top:6px;flex:none}
+.tab{display:flex;flex-direction:column;align-items:center;gap:3px;min-height:56px;justify-content:center;font-size:16px;letter-spacing:-.02em;font-weight:600;color:var(--tab-inactive);white-space:nowrap;border:0;background:none;cursor:pointer}
+.tab.on{color:var(--tab-active)}
+.tab.on .ti{background:var(--bg-selected);color:var(--icon-brand)}
+.tab .ti{width:56px;height:30px;border-radius:15px;display:grid;place-items:center;position:relative}
+.tab .cnt{position:absolute;top:-4px;right:6px;min-width:20px;height:20px;border-radius:10px;background:var(--status-emergency-solid);color:#fff;font-size:15px;font-weight:600;display:grid;place-items:center;padding:0 5px}
+
+/* ---- added for the login → quote flow ---- */
+
+.center{text-align:center}
+/* option card with an icon (role picker) */
+
+/* quick actions on home */
+
+/* trade chips */
+
+/* media rows (step 3) */
+
+/* generating */
+
+.meter{height:8px;border-radius:4px;background:var(--progress-track);overflow:hidden}
+.meter i{display:block;height:100%;width:75%;background:var(--progress-fill);border-radius:4px}
+/* quote */
+.steps-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
+.steps-list li{display:flex;gap:12px;align-items:flex-start}
+.steps-list .n{width:calc(26px * min(var(--ts,1),1.5));height:calc(26px * min(var(--ts,1),1.5));border-radius:50%;background:var(--action-primary);color:var(--text-on-color);display:grid;place-items:center;font-size:16px;font-weight:600;flex:none;margin-top:-1px}
+
+/* ---- v7: review fixes ---- */
+.btn:disabled{background:var(--action-disabled);color:var(--text-disabled);cursor:not-allowed}
+
+.tab:focus-visible,.ph .rm:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+
+/* ---- colour option B: blue, fully rounded (compare with the navy default) ---- */
+html[data-theme=blue]{--action-primary:var(--blue-700);--action-primary-pressed:var(--blue-800);
+  --r-btn:999px;--r-ctl:999px;--r-ctl-in:999px}
+
+/* show / hide password as a word, clearer than an eye icon for older users */
+
+/* ---- sign-in, iteration 2: filled fields with floating labels (reference: Patreon) ---- */
+
+.btn-social{background:var(--bg-page);color:var(--text-primary);box-shadow:inset 0 0 0 1px var(--border-tile-strong,#BAC2CE)}
+.btn-social:active{background:var(--bg-card)}
+
+/* ---- sign-in, iteration 3 (reference: close button, big left title, outlined fields, social row) ---- */
+.login-h{font-size:var(--type-display-size);line-height:var(--type-display-lh);letter-spacing:var(--type-display-tracking);margin-bottom:12px}
+.lbl.soft{font-weight:500;color:var(--text-secondary)}
+.fbtn-eye{width:48px;height:48px;margin:-10px -13px -10px 0;border:0;background:none;display:grid;place-items:center;color:var(--text-brand);cursor:pointer;flex:none;border-radius:50%}
+.fbtn-eye:focus-visible{outline:3px solid var(--border-focus);outline-offset:0}
+.link-u{text-decoration:underline;text-underline-offset:3px;color:var(--text-brand)}
+.social-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.social-row .btn-social{border-radius:999px;box-shadow:inset 0 0 0 1px var(--border-input)}
+
+/* ---- role picker (reference: Wise): rows you tap to continue, with a small animation per role ---- */
+.roles{display:flex;flex-direction:column;gap:10px;margin-top:24px}
+.role-row{display:flex;align-items:center;gap:12px;min-height:112px;padding:10px 12px 10px 10px;border:1px solid var(--border-input);border-radius:16px;background:var(--bg-page);text-align:left;cursor:pointer;width:100%}
+.role-row:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.role-row:active{background:var(--bg-card)}
+.role-row .rt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
+.role-row .rt b{font-size:var(--type-title-size);line-height:1.3;font-weight:600;color:var(--text-primary)}
+.role-row .chev{color:var(--text-brand)}
+
+/* plays twice, then rests on the finished picture (WCAG 2.2.2: nothing moves longer than 5 s) */
+
+@keyframes mih-pop{0%{transform:scale(0);opacity:0}18%{transform:scale(1.12);opacity:1}28%,100%{transform:scale(1);opacity:1}}
+@keyframes mih-rise{0%{transform:translateY(18px);opacity:0}30%,100%{transform:translateY(0);opacity:1}}
+
+/* each role has its own colour so the two pictures are easy to tell apart */
+
+.role-h{text-wrap:wrap;line-height:1.2}
+
+/* role pictures: the client's illustrations (animated WebP, plays once; still PNG with Reduce Motion) */
+.role-img{width:calc(88px * min(var(--ts,1),1.5));height:calc(88px * min(var(--ts,1),1.5));flex:none;display:block}
+.role-img img{width:100%;height:100%;display:block;object-fit:contain}
+
+/* ---- pro home, iteration 2: one greeting line, two simple tabs, job cards with the badge on top ---- */
+
+/* ---- tab bar, iteration 2 (v3 style): icon + label, no pill; active = blue + bold + softly filled icon ---- */
+.tabs{padding-top:8px}
+.tab .ti,.tab.on .ti{background:none;width:auto;height:28px}
+.tab.on{color:var(--text-link);font-weight:600}
+.tab.on .ti svg{fill:currentColor;fill-opacity:.16}
+.tab .cnt{right:-12px;top:-6px}
+.tab{font-weight:500}
+.tab.on{font-weight:600}
+
+/* ---- pro home, iteration 3: segmented view switch + search and filters ---- */
+
+/* ---- pro home, iteration 4: title + icon actions, text tabs, a plain list ---- */
+.lt-head{display:flex;justify-content:space-between;align-items:center;padding:8px 8px 0 20px;flex:none}
+
+/* ---- pro home, iteration 5 (reference: Upwork): profile image top-right, full-width search with filter inside ---- */
+.lt-head{padding:8px 20px 0}
+.avatar-btn{width:48px;height:48px;border:0;padding:0;background:none;border-radius:50%;display:grid;place-items:center;cursor:pointer;flex:none}
+.avatar-btn img{width:40px;height:40px;border-radius:50%;display:block;box-shadow:0 0 0 1px var(--border-divider)}
+.avatar-btn:focus-visible{outline:3px solid var(--border-focus);outline-offset:1px}
+
+/* ---- tab bar, iteration 3: four tabs, more room ---- */
+.tabs.t4{grid-template-columns:repeat(4,minmax(0,1fr));padding:8px 8px 0}
+.tabs.t4 .tab{min-height:58px;gap:4px;letter-spacing:0}
+
+/* ---- pro home, iteration 6: separate search + filter, job cards that answer a pro's questions ---- */
+.usearch2{display:flex;gap:10px;margin:8px 20px 4px;flex:none}
+.us-field2{flex:1;min-width:0;display:flex;align-items:center;gap:10px;min-height:48px;padding:0 14px;border-radius:var(--r-ctl,14px);background:var(--bg-card);border:1px solid var(--border-input);cursor:text}
+.us-field2 svg{color:var(--icon-default)}
+.us-field2 input{border:0;outline:0;background:none;font:inherit;color:var(--text-primary);flex:1;min-width:0;padding:0;min-height:46px}
+.us-field2 input::placeholder{color:var(--text-placeholder);opacity:1}
+.us-field2:focus-within{border:2px solid var(--border-focus);padding:0 13px}
+.us-filter2{position:relative;width:50px;height:50px;flex:none;border-radius:var(--r-ctl,14px);border:1px solid var(--border-input);background:var(--bg-page);display:grid;place-items:center;color:var(--text-brand);cursor:pointer}
+.us-filter2::after{content:"";position:absolute;top:9px;right:10px;width:9px;height:9px;border-radius:50%;background:var(--action-primary);box-shadow:0 0 0 2px var(--bg-page)}
+.us-filter2:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.jlist2{padding-top:14px;gap:12px}
+
+/* ---- pro home, iteration 7: avatar left of the title, round search + filter, compact cards ---- */
+.lt-head.lt-left{justify-content:flex-start;gap:10px;padding:8px 20px 0 12px}
+.usearch2 .us-field2{border-radius:999px;padding:0 16px}
+.usearch2 .us-field2:focus-within{padding:0 15px}
+.usearch2 .us-filter2{border-radius:50%}
+.usearch2 .us-filter2::after{top:10px;right:11px}
+.jlist2{gap:10px}
+
+/* ---- audit fixes (screens 1-3) ---- */
+.social-row .btn-social{border-radius:var(--r-btn,16px)}
+.lt-head.lt-left{padding-left:16px}
+
+/* search bar keeps the form-field shape (14px); only the filter button is round */
+.usearch2 .us-field2{border-radius:14px;padding:0 14px}
+.usearch2 .us-field2:focus-within{padding:0 13px}
+
+/* icon alignment: centre the icons in the search field and filter button (they sat on the text baseline, 3px high) */
+.us-field2 [data-i],.us-filter2 [data-i]{display:flex;align-items:center;justify-content:center}
+.us-field2 [data-i] svg,.us-filter2 [data-i] svg{display:block}
+.usearch2 .us-filter2::after{top:7px;right:7px}
+
+/* ---- job card, iteration 8: price top-right on every card (pros compare down one edge) ---- */
+
+/* ---- job card, iteration 9: full-width top line (badge + time left, price right), then photo + details ---- */
+
+/* ---- job card, iteration 10: badge row only when urgent; price directly under the title ---- */
+
+/* large text: the photo moves above the text, and the price may wrap */
+
+/* ---- job card options A / B / C (for choosing) ---- */
+
+/* A */
+
+/* B */
+
+/* C */
+
+/* option fixes */
+
+/* ---- web-app fixes: brand on Log in, no thin borders, no small grey text ---- */
+
+/* cards: no hairline border; a soft, native-style shadow separates them from the white page */
+
+.jlist2{padding:16px 20px 24px;gap:14px}
+/* card details at 16px instead of 14px */
+
+/* option A: price stays beside the title at normal size, wraps under it at large text */
+
+/* ---- job card = option A, bigger photo (80px): padding and gap tightened so the price stays on the title line ---- */
+
+/* ---- job card, final structure: one top line (badge or trade | price), then photo + full-width title ---- */
+
+.jk-price{margin-left:auto;display:inline-flex;align-items:baseline;gap:4px;font-size:var(--type-title-size);font-weight:600;color:var(--text-brand);white-space:nowrap}
+
+/* badge top-right, trade top-left; price under the title */
+
+/* job cards: border instead of shadow, same as the role cards */
+
+/* ---- job card, flush-photo version (from the Fiverr / LinkedIn references): photo runs the full height
+   of the card on the left; trade + badge on top, title, place line, quote status, price at the bottom ---- */
+
+/* slimmer photo so the badge sits beside the trade and the place line stays on one line */
+
+/* large text: photo moves above the details sooner, and the price may wrap instead of spilling */
+
+/* ---- shorter job card: distance + badge, title, price (trade, time and quote count live in the job details) ---- */
+
+/* role pictures: the user's still cut-outs (about 1.2 : 1), so the box is a little wider than tall */
+.role-img{width:calc(104px * min(var(--ts,1),1.5));height:calc(88px * min(var(--ts,1),1.5))}
+/* job card: price on the left, lined up with the title */
+
+.role-img{width:calc(96px * min(var(--ts,1),1.2));height:calc(80px * min(var(--ts,1),1.2))}
+.role-img{width:96px;height:80px}
+
+/* ---- job rows, Luma style: no card box, a divider between rows; square photo with the status badge
+   sitting on its bottom edge; title, place, price on the right ---- */
+.jlist-l{gap:0;padding-top:4px}
+.jl{display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px;width:100%;padding:16px 0 0;border:0;background:none;text-align:left;cursor:pointer;color:inherit;font:inherit}
+.jl:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px;border-radius:12px}
+.jl-ph{position:relative;flex:none;width:calc(96px * min(var(--ts,1),1.5));padding-bottom:14px}
+.jl-ph img{display:block;width:100%;height:calc(96px * min(var(--ts,1),1.5));border-radius:14px;object-fit:cover;background:var(--bg-card)}
+.jl-bdg{position:absolute;left:50%;bottom:0;transform:translateX(-50%);white-space:nowrap;border:2px solid var(--bg-page);padding:2px 10px;border-radius:999px;font-size:var(--type-small-size);font-weight:600}
+.jl-body{flex:1 1 180px;min-width:0;display:flex;flex-direction:column;gap:4px;padding-bottom:16px;border-bottom:1px solid var(--border-divider);align-self:stretch}
+.jl:last-child .jl-body{border-bottom:0}
+.jl-body b{font-size:var(--type-label-size);line-height:1.35;font-weight:600;color:var(--text-primary);text-wrap:pretty}
+.jl-line{display:flex;align-items:center;gap:6px;font-size:var(--type-body-size);color:var(--text-secondary)}
+.jl-line [data-i]{flex:none;display:inline-flex}
+.jl-body .jk-price{margin:2px 0 0;flex-wrap:wrap;white-space:normal}
+
+/* role cards: picture keeps its own width (no empty box around it), tighter gap, calmer line height */
+.role-img{width:auto;height:80px}
+.role-img img{width:auto;height:100%}
+.role-row{gap:10px;padding-left:12px}
+.role-row .rt .t-sec{line-height:1.35}
+/* same slot for both pictures so the two text blocks line up */
+.role-img{width:97px;height:80px}
+.role-img img{width:100%;height:100%;object-fit:contain}
+
+/* ---- review of screens 1-3 ---- */
+/* Log in: one spacing rhythm - title to first field 24, field to field 16, last field to button 24 */
+.login-h{margin-bottom:8px}
+.role-h{margin-bottom:0}
+.field + .btn-primary{margin-top:8px}
+/* job rows: smaller photo, calmer corner (12px, like the search field), badge no wider than the photo, tighter rows */
+.jl{padding-top:14px}
+.jl-ph{width:calc(88px * min(var(--ts,1),1.5));padding-bottom:12px}
+.jl-ph img{height:calc(88px * min(var(--ts,1),1.5));border-radius:12px}
+.jl-bdg{padding:1px 8px;font-weight:600}
+.jl-body{padding-bottom:14px;gap:3px}
+/* badge must fit the photo: 92px photo, 6px pill padding */
+.jl-ph{width:calc(92px * min(var(--ts,1),1.5))}
+.jl-ph img{height:calc(92px * min(var(--ts,1),1.5))}
+.jl-bdg{padding:1px 6px}
+
+/* job rows: badges are the design-system badges (icon, 8px corners, same padding and weight);
+   only the placement is special - sitting on the photo's bottom edge with a white ring */
+.jl-bdg{padding:2px 9px;border-radius:8px;font-weight:500;gap:6px;border:2px solid var(--bg-page)}
+.jl-bdg.emergency{font-weight:600}
+
+/* badge lives in the text column now (design-system badge is wider than the photo) */
+.jl-ph{padding-bottom:0}
+
+/* back to the rounded pill on the photo edge (user preferred it) */
+.jl-ph{padding-bottom:12px}
+.jl-bdg{padding:1px 6px;border-radius:999px;font-weight:600;border:2px solid var(--bg-page)}
+
+/* ================= estimate flow v2: one question per page, same parts as screens 1-3 ================= */
+.fl-nav{justify-content:flex-start;padding:4px 20px 0;min-height:52px}
+.fprog{display:flex;gap:6px;padding:12px 20px 0;flex:none}
+.fprog i{flex:1;height:6px;border-radius:3px;background:var(--progress-track);overflow:hidden}
+.fprog i b{display:block;height:100%;background:var(--progress-fill);border-radius:3px}
+.fl-body{padding-top:24px;gap:16px}
+
+.fl-q{font-size:var(--type-display-size);line-height:var(--type-display-lh);letter-spacing:var(--type-display-tracking);margin-bottom:8px;text-wrap:balance}
+.fl-sub{margin-top:-16px;margin-bottom:8px;line-height:1.4}
+.fl-foot{padding-top:12px}
+
+/* option rows = the role-card look: 1px border, 16px corners, radio on the right */
+
+.radio{width:24px;height:24px;border-radius:50%;border:2px solid var(--border-control);flex:none;display:grid;place-items:center;background:var(--bg-page)}
+
+[aria-checked=true] > .radio{border-color:var(--border-selected)}
+[aria-checked=true] > .radio::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--border-selected)}
+
+/* customer list = the home list look: rows with dividers, no box */
+
+/* description */
+.fl-text textarea{min-height:calc(var(--type-body-size) * 1.5 * 5)}
+
+/* photos */
+
+.pgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pgrid .ph{aspect-ratio:1;border-radius:14px;background:var(--bg-card)}
+.pgrid .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+
+/* cards with a border, like the rest of the approved screens */
+
+/* large text: tiles get wider (fewer per row) so "Add photo" always fits */
+.pgrid{grid-template-columns:repeat(auto-fill,minmax(calc(96px * var(--ts,1)),1fr))}
+
+.fl-sub{text-wrap:pretty}
+
+/* building screen: tighter so everything fits without scrolling */
+.fl-build{gap:16px}
+.fl-build .checks{gap:12px}
+.fl-build .fl-q{margin-bottom:0}
+
+/* ================= v3: two colour options, no light blue ================= */
+/* Navy only: navy does everything, neutral grey for selected fills */
+[data-theme=navy]{--action-primary:var(--navy);--action-primary-pressed:var(--navy-pressed);--r-btn:16px;--r-ctl:14px;--r-ctl-in:11px;
+  --bg-selected:#F2F4F7;--border-selected:var(--navy);--border-focus:var(--navy);--icon-brand:var(--navy);--progress-fill:var(--navy);
+  --text-link:var(--navy);--dot-active:var(--navy);--tab-active:var(--navy);--status-info-soft:#F2F4F7;--text-info:var(--navy);--hero-accent:rgba(255,255,255,.16)}
+/* Navy + orange: navy for text and brand, burnt orange (#9A3412, 7.3:1 with white) for action and selection */
+[data-theme=warm]{--action-primary:#9A3412;--action-primary-pressed:#7C2D12;--r-btn:16px;--r-ctl:14px;--r-ctl-in:11px;
+  --bg-selected:#FFF4ED;--border-selected:#9A3412;--border-focus:#9A3412;--icon-brand:#9A3412;--progress-fill:#9A3412;
+  --text-link:#7C2D12;--dot-active:#9A3412;--tab-active:#7C2D12;--status-info-soft:#FFF4ED;--text-info:#7C2D12;--hero-accent:#9A3412}
+.screen-slot[data-theme]{display:block}
+
+/* home hero: one personal, useful card instead of a banner carousel */
+
+/* pill filters / choices (RoofBros-style pills, 48px tall for the tap target) */
+
+/* two-choice pill toggle (Who buys the materials?) */
+
+.fl-text textarea{min-height:calc(var(--type-body-size) * 1.5 * 3)}
+
+/* ================= v4: orange dropped; three options to compare ================= */
+/* Navy + yellow: yellow main buttons with navy text (9.9:1), navy for selection; yellow highlight on navy surfaces */
+[data-theme=yellow]{--action-primary:#FFC21A;--action-primary-pressed:#F0AE00;--r-btn:16px;--r-ctl:14px;--r-ctl-in:11px;
+  --bg-selected:#F2F4F7;--border-selected:var(--navy);--border-focus:var(--navy);--icon-brand:var(--navy);--progress-fill:var(--navy);
+  --text-link:var(--navy);--dot-active:var(--navy);--tab-active:var(--navy);--status-info-soft:#F2F4F7;--text-info:var(--navy);--hero-accent:#FFC21A}
+/* Navy + bright blue: bright blue used solid (7.65:1 with white), white selected fills - no light blue tints */
+[data-theme=bright]{--action-primary:#0147C9;--action-primary-pressed:#0B3FB0;--r-btn:16px;--r-ctl:14px;--r-ctl-in:11px;
+  --bg-selected:#FFFFFF;--border-selected:#0147C9;--border-focus:#0147C9;--icon-brand:#0147C9;--progress-fill:#0147C9;
+  --text-link:#0147C9;--dot-active:#0147C9;--tab-active:#0147C9;--status-info-soft:#F2F4F7;--text-info:#0147C9;--hero-accent:#0147C9}
+
+/* per-option tokens (inherit from the nearest option, so nested comparison phones stay correct) */
+[data-theme=navy]{--on-action:#FFFFFF;--select-fill:var(--navy);--on-select:#FFFFFF;--hero-accent-text:#FFFFFF;--tile-bg:#F2F4F7}
+[data-theme=yellow]{--on-action:var(--navy);--select-fill:var(--navy);--on-select:#FFFFFF;--hero-accent-text:var(--navy);--tile-bg:#F2F4F7}
+[data-theme=bright]{--on-action:#FFFFFF;--select-fill:#0147C9;--on-select:#FFFFFF;--hero-accent-text:#FFFFFF;--tile-bg:#F2F4F7;--text-info:#0B3FB0}
+.btn-primary{color:var(--on-action,var(--text-on-color))}
+.steps-list .n{background:var(--select-fill,var(--action-primary));color:var(--on-select,var(--text-on-color))}
+
+/* ---- v5: illustrations, pro earnings line, sent screen ---- */
+
+.sent .fl-q{margin-bottom:0}
+.sent .fl-sub{margin-top:-8px}
+/* sent screen: fits without scrolling; price wraps under the title at large text */
+.sent{gap:12px}
+
+.sent .steps-list{gap:10px}
+
+/* ================= v6 polish (3 reviews: visual, UX, consistency) ================= */
+/* numbers: tabular only where digits line up; body text keeps normal hyphens */
+.m{font-variant-numeric:normal}
+.jk-price,.t-display{font-variant-numeric:tabular-nums}
+/* one radius family: 16 for fields, rows, cards, buttons; 12 for photos and small tiles; pills for chips and badges */
+[data-theme=bright]{--r-ctl:16px;--r-ctl-in:12px}
+.input,.us-field2,.note{border-radius:16px}
+.pgrid .ph{border-radius:12px}
+/* fewer grey patches: fields, notes and the add-photo tile are white with the standard border */
+.us-field2{background:var(--bg-page)}
+.note{background:var(--bg-page);box-shadow:inset 0 0 0 1px var(--border-input);padding:16px}
+.note b{color:var(--text-link)}
+
+/* secondary buttons: outlined, not grey (grey read as disabled) */
+.btn-tonal{background:var(--bg-page);box-shadow:inset 0 0 0 1px var(--border-input);color:var(--text-brand)}
+.btn-tonal:active{background:var(--bg-card)}
+/* selected option: the icon tile turns blue - a confident selected moment */
+
+/* flow header: back button and progress share one row */
+.fl-nav{gap:16px;padding-right:20px}
+.fl-nav .fprog{flex:1;padding:0}
+.fl-nav:empty{display:none}
+
+.fl-body .fl-sub{margin:-8px 0 0}
+/* 4/8 spacing grid */
+.pgrid{gap:12px}
+
+.jl{padding-top:16px}
+.jl-body{padding-bottom:16px}
+.meter{height:6px;border-radius:3px}
+.meter i{border-radius:3px}
+/* calmer weights: bold only where it carries meaning */
+.checks li{font-weight:500}
+.checks li.now{font-weight:600}
+.fl-body .field > .lbl{font-size:var(--type-title-size);font-weight:600}
+/* one page-title size */
+.lt-head .t-h1{font-size:var(--type-display-size);line-height:var(--type-display-lh);letter-spacing:var(--type-display-tracking)}
+/* urgent pill: the design-system urgent fill (amber, dark text) - same solid pill style as Emergency */
+.jl-bdg.warn{background:#FF9500;color:var(--text-primary);box-shadow:none}
+/* money: amount in green, the rest quiet, so it doesn't wrap as a second headline */
+
+/* log in: one link style */
+.link-u{color:var(--text-link);text-decoration:none}
+.btn-social{gap:10px;font-weight:600;color:var(--text-primary)}
+/* describe: mic inside the text box */
+.fl-text{flex-direction:column;align-items:stretch;gap:8px;padding-bottom:8px}
+.speak{align-self:flex-end;display:inline-flex;align-items:center;gap:6px;min-height:48px;padding:0 16px;border-radius:999px;border:1px solid var(--border-input);background:var(--bg-page);font:inherit;font-weight:600;color:var(--text-link);cursor:pointer}
+.speak:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+/* building: mascot on a navy tile (echoes the home hero) */
+
+/* sent: success mark */
+.done-ic{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--action-primary);color:var(--on-action,#fff);flex:none}
+.social-row{grid-template-columns:repeat(auto-fit,minmax(calc(130px * var(--ts,1)),1fr))}
+/* role cards: picture sits flush on the card's left and bottom edges (no padding around it), like the home hero */
+.role-row{padding:0 12px 0 0;overflow:hidden;align-items:stretch;gap:12px;min-height:104px}
+.role-img{width:116px;height:auto;align-self:stretch;display:flex;align-items:flex-end}
+.role-img img{width:100%;height:auto;max-height:100%;object-fit:contain;object-position:left bottom;display:block}
+.role-row .rt{justify-content:center;padding:14px 0}
+.role-row .chev{align-self:center}
+.role-img img{max-height:96px;width:auto;max-width:100%}
+/* role cards, structured: same height, and each picture stands in the same fixed panel (flush left, top, bottom) */
+.role-row{min-height:120px;gap:14px}
+.role-img{width:112px;background:var(--bg-card);justify-content:center;align-items:flex-end}
+.role-img img{max-height:94px;max-width:100%;object-position:center bottom}
+
+/* ---- home v7: less clutter. One "your next job" card (links to My jobs), then the list with a heading ---- */
+.nextjob{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;padding:16px;border:0;border-radius:16px;background:var(--bg-inverse);color:var(--text-on-color);text-align:left;font:inherit;cursor:pointer;flex:none;margin-top:4px}
+.nextjob:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.nj-top{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;width:100%;margin-bottom:4px}
+
+.nj-when{padding:3px 10px;border-radius:999px;background:var(--hero-accent);color:var(--hero-accent-text,var(--text-on-color));font-size:var(--type-small-size);font-weight:600;white-space:nowrap}
+.nj-t{font-size:var(--type-title-size);line-height:1.3;font-weight:600}
+.nj-s{font-size:var(--type-body-size);line-height:1.4}
+.nj-go{display:inline-flex;align-items:center;gap:4px;margin-top:8px;font-size:var(--type-body-size);font-weight:600}
+.sec-row{display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;margin-top:20px;flex:none}
+.sec-t{font-size:var(--type-title-size);font-weight:600;color:var(--text-primary)}
+.jlist-l > .sec-row + .jl{padding-top:12px}
+
+.nj-top{margin-bottom:0}
+.nj-go{margin-top:0}
+
+.nextjob{gap:10px}
+.nj-main{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;width:100%}
+.nj-text{display:flex;flex-direction:column;gap:2px;min-width:0;flex:1 1 150px}
+
+/* next-job card, refined: when -> what -> where/who; quiet label, pill link */
+.nextjob{gap:12px;padding:14px 16px 16px;--nj-muted:#C9D2E3}
+
+.nj-go{gap:2px;padding:4px 8px 4px 12px;border-radius:999px;border:1px solid rgba(255,255,255,.55);font-size:var(--type-small-size)}
+.nj-main{justify-content:flex-start;gap:14px;flex-wrap:wrap}
+
+.nj-text{flex:1 1 160px}
+.nj-s{display:flex;align-items:center;gap:6px;color:var(--nj-muted)}
+.nj-s [data-i]{display:inline-flex;flex:none}
+
+.nj-s{display:block}
+
+/* next-job card v3: header strip (label + link) | body (big title, who/where, time block right) */
+.nextjob{padding:0;gap:0;margin-top:0}
+.nj-top{padding:10px 12px 10px 16px;margin:0;border-bottom:1px solid rgba(255,255,255,.22);align-items:center}
+
+.nj-go{border:0;padding:0;gap:2px;margin:0;font-size:var(--type-small-size);font-weight:600}
+.nj-main{padding:14px 16px 16px;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.nj-text{flex:1 1 150px;gap:2px}
+.nj-t{font-size:calc(23px * min(var(--ts,1),1.5));line-height:1.25}
+.nj-s{display:block;color:var(--text-on-color)}
+
+/* home spacing, same rhythm as screens 1-2: 16 between blocks, 28 before the list section */
+.usearch2{margin-top:8px}
+.jlist-l{padding-top:16px}
+.sec-row{margin-top:28px}
+.jlist-l > .sec-row + .jl{padding-top:14px}
+.nj-t{font-size:calc(22px * min(var(--ts,1),1.5))}
+
+.nj-main{gap:10px}
+.usearch2{margin-top:10px}
+.jlist-l{padding-top:12px}
+
+/* next-job card v4: the time pill replaces the label in the header strip; title gets the full width */
+.nj-top{padding:10px 12px 10px 12px}
+.nj-when{padding:4px 12px;font-size:var(--type-small-size);font-weight:600}
+.nj-main{padding:12px 16px 16px}
+.nj-top{padding-left:16px}
+
+/* ---- home, empty: start card (create first estimate) + empty list ---- */
+.startcard{display:flex;align-items:flex-end;justify-content:space-between;gap:4px;padding:16px 0 0 16px;border-radius:16px;background:var(--bg-inverse);color:var(--text-on-color);overflow:hidden;flex:none}
+.sc-text{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding-bottom:16px;flex:1 1 170px;min-width:0}
+.sc-t{font-size:calc(22px * min(var(--ts,1),1.5));line-height:1.25;font-weight:600;text-wrap:balance}
+
+.sc-btn{width:auto;min-height:48px;padding:8px 18px 8px 14px;margin-top:8px;background:var(--bg-page);color:var(--text-brand);font-size:var(--type-body-size);border-radius:14px}
+.sc-btn:active{background:var(--bg-card)}
+.sc-btn:focus-visible{outline:3px solid #FFFFFF;outline-offset:2px}
+.sc-img{height:calc(124px * min(var(--ts,1),1.2));width:auto;flex:none;display:block;align-self:flex-end}
+.startcard{flex-wrap:wrap}
+
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:28px 16px 8px}
+.empty-ic{display:grid;place-items:center;width:64px;height:64px;border-radius:50%;background:var(--bg-card);color:var(--text-secondary);margin-bottom:8px}
+.empty b{font-size:var(--type-title-size);font-weight:600;color:var(--text-primary)}
+.empty .t-sec{max-width:26ch;line-height:1.4}
+
+.sc-btn{white-space:nowrap;gap:6px}
+.sc-img{height:calc(100px * min(var(--ts,1),1.2))}
+.sc-text{flex:1 1 190px}
+
+.sc-img{height:calc(116px * min(var(--ts,1),1.2));margin-right:-6px}
+.sc-img{height:calc(110px * min(var(--ts,1),1.2));margin-right:2px}
+
+/* start card v2, structured: [text | pro standing] on top, full-width button as the base */
+.startcard{flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:0;padding:16px}
+.sc-body{display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.sc-text{flex:1 1 160px;align-self:center;gap:6px;padding:0 0 14px}
+.sc-img{height:calc(116px * min(var(--ts,1),1.2));margin:0}
+.sc-btn{width:100%;margin-top:0;justify-content:center;min-height:52px;font-size:var(--type-title-size)}
+.sc-btn{white-space:normal}
+
+/* ================= type pass, screens 1-4 only (.ty4) =================
+   Design-system scale only: small 14 · body/label 16 · title 18 · h3 21 · h1 28.
+   Three weights: 400 = text you read · 600 = 14-16px labels, row titles, links, tabs, badges · 700 = headings (18+), prices, filled buttons.
+   Tracking: 0 at 14-16px, the token's value at 18px and up. */
+.ty4{letter-spacing:0}
+/* one screen title per screen = h1 (28), not display (32) */
+.ty4 .login-h,.ty4 .lt-head .t-h1{font-size:var(--type-h1-size);line-height:var(--type-h1-lh);letter-spacing:var(--type-h1-tracking);font-weight:600}
+/* section title = h3 (21) */
+.ty4 .sec-t{font-size:var(--type-h3-size);line-height:var(--type-h3-lh);letter-spacing:var(--type-h3-tracking);font-weight:600}
+/* card titles = title (18) */
+.ty4 .role-row .rt b,.ty4 .sc-t,.ty4 .nj-t{font-size:var(--type-title-size);line-height:var(--type-title-lh);letter-spacing:var(--type-title-tracking);font-weight:600}
+.ty4 .role-row .rt{gap:4px}
+/* price = title (18/700): the one bold thing in a job row */
+.ty4 .jk-price{font-size:var(--type-title-size);line-height:var(--type-title-lh);letter-spacing:var(--type-title-tracking);font-weight:600}
+
+/* row titles and labels = label (16/600) */
+.ty4 .jl-body b{font-size:var(--type-label-size);font-weight:600;line-height:1.35;letter-spacing:0}
+.ty4 .lbl.soft{font-weight:600}
+.ty4 .empty b{font-size:var(--type-label-size);line-height:var(--type-label-lh);font-weight:600}
+/* buttons = label (16): 700 on the filled button, 600 on outlined and text buttons */
+.ty4 .btn{font-size:var(--type-label-size);font-weight:600;letter-spacing:0}
+.ty4 .btn-text,.ty4 .btn-social{font-weight:600}
+/* small (14/600): pills, badges, tabs, links in cards */
+.ty4 .nj-when,.ty4 .nj-go,.ty4 .jl-bdg{font-size:var(--type-small-size);font-weight:600;letter-spacing:0}
+.ty4 .tab,.ty4 .tab.on{font-size:var(--type-small-size);font-weight:600;letter-spacing:0}
+.ty4 .tab .cnt{font-size:16px;font-weight:600;line-height:1;min-width:22px;height:22px;border-radius:11px}
+/* body (16/400) */
+.ty4 .nj-s,.ty4 .jl-line,.ty4 .t-sec{font-weight:400;letter-spacing:0}
+.ty4 .tab,.ty4 .tab.on{font-size:16px}
+
+/* ================= flow v8: 3 light steps (job -> materials and timing -> photos), customer chosen when sending ================= */
+/* dropdown row (Trade) */
+.selrow{display:flex;align-items:center;gap:10px;min-height:56px;padding:10px 14px 10px 16px;border:1px solid var(--border-input);border-radius:16px;background:var(--bg-page);width:100%;text-align:left;font:inherit;color:var(--text-primary);cursor:pointer}
+.selrow:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+
+.sel-v{flex:1;min-width:0;font-size:var(--type-body-size)}
+.sel-chev{display:inline-flex;transform:rotate(90deg);color:var(--text-secondary);flex:none}
+/* tab-style switch (who buys / how soon) */
+.segc{display:flex;flex-wrap:wrap;gap:4px;padding:4px;border-radius:16px;background:var(--bg-card)}
+.segc button{flex:1 1 0;min-width:min(100%,max-content);min-height:48px;padding:6px 8px;border:0;border-radius:12px;background:none;font:inherit;font-size:var(--type-label-size);font-weight:600;color:var(--text-secondary);cursor:pointer}
+.segc button[aria-checked=true]{background:var(--action-primary);color:var(--on-action,#fff)}
+.segc button:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.opt-tag{font-weight:400;color:var(--text-secondary)}
+.input.zip{max-width:160px}
+/* photos: three small add buttons, then what was added */
+
+.fl-body{gap:20px}
+
+.fl-body .fl-q{margin-bottom:4px}
+.fl-body .fl-sub{margin:-12px 0 0}
+.fl-text textarea{min-height:calc(var(--type-body-size) * 1.5 * 4)}
+
+/* type rules (same as screens 1-4) for the rest of the flow */
+.ty4 .fl-q{font-size:var(--type-h1-size);line-height:var(--type-h1-lh);letter-spacing:var(--type-h1-tracking);font-weight:600}
+.ty4 .fl-body .field > .lbl{font-size:var(--type-label-size);line-height:var(--type-label-lh);font-weight:600;letter-spacing:0}
+
+.ty4 .btn-tonal{font-weight:600}
+.ty4 .bdg,.ty4 .steps-list .n{font-weight:600;letter-spacing:0}
+.ty4 .checks li{font-weight:400}
+.ty4 .checks li.now{font-weight:600}
+
+.ty4 .t-title{font-size:var(--type-title-size);line-height:var(--type-title-lh);letter-spacing:var(--type-title-tracking);font-weight:600}
+.fl-body > .us-field2{flex:none}
+
+/* ================= v9: calmer colour, fewer things, clearer labels ================= */
+/* blue is kept for: the main button, the progress bar, links, the selected radio. Everything else is navy/ink. */
+.segc button{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;line-height:1.25}
+.segc button b{font-weight:600}
+.segc button small{font-size:var(--type-small-size);font-weight:400;white-space:nowrap}
+.segc button[aria-checked=true]{background:var(--bg-page);color:var(--text-brand);box-shadow:inset 0 0 0 1.5px var(--text-brand)}
+.segc button[aria-checked=true] small{color:var(--text-secondary)}
+
+.note svg{color:var(--text-brand)}
+.note b{color:var(--text-primary)}
+.done-ic{background:var(--text-success);color:#fff}
+.sel-v{font-weight:400}
+.opt-tag{font-weight:400}
+/* home: start an estimate from the header */
+.hd-new{margin-left:auto;display:inline-flex;align-items:center;gap:4px;min-height:48px;padding:0 16px 0 12px;border-radius:999px;border:1px solid var(--border-input);background:var(--bg-page);font:inherit;font-size:var(--type-label-size);font-weight:600;color:var(--text-brand);cursor:pointer;flex:none}
+.hd-new:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.lt-head.lt-left{padding-right:20px}
+.fl-body{padding-top:20px}
+
+/* ---- v10: flow header split (button + step text | bar below); quick picks on "What's the job?" ---- */
+.fl-nav{justify-content:space-between;gap:12px;padding-right:20px}
+
+.fl-nav + .fprog{padding:8px 20px 0}
+/* quick picks: one row that scrolls sideways; tap one to fill the description */
+.qchips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -20px;padding:2px 20px}
+.qchips::-webkit-scrollbar{display:none}
+.qchip{flex:none;min-height:48px;padding:0 16px;border-radius:999px;border:1px solid var(--border-input);background:var(--bg-page);font:inherit;font-size:var(--type-label-size);font-weight:600;color:var(--text-primary);white-space:nowrap;cursor:pointer}
+.qchip[aria-pressed=true]{border:1.5px solid var(--text-brand);background:var(--bg-card);color:var(--text-brand)}
+.qchip:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+
+/* quick picks v2: light suggestions, not inputs. Soft grey pills with no border, regular weight, all visible (they wrap),
+   selected = solid navy. The button keeps a 48px tap area; the visible pill inside is 40px. */
+.qchips{flex-wrap:wrap;overflow:visible;margin:-4px 0;padding:0;gap:0 8px}
+.qchip{min-height:48px;padding:0;border:0;background:none;display:inline-flex;align-items:center;border-radius:999px}
+.qchip span{display:inline-flex;align-items:center;min-height:40px;padding:4px 14px;border-radius:999px;background:var(--bg-card);font-size:var(--type-body-size);font-weight:400;color:var(--text-primary);white-space:nowrap}
+.qchip[aria-pressed=true]{border:0;background:none}
+.qchip[aria-pressed=true] span{background:var(--text-brand);color:#fff;font-weight:600}
+.qchip:active span{background:var(--border-divider)}
+/* quick picks v3: back to ONE row that scrolls sideways (light grey pills kept) */
+.qchips{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;margin:-4px -20px;padding:0 20px;gap:8px}
+.qchips::-webkit-scrollbar{display:none}
+/* flow spacing = the Log in rule: 16 bar->title, 24 title->first block, 8 label->control, 16 between blocks */
+.fl-body{gap:16px;padding-top:16px}
+.fl-body .fl-q{margin-bottom:8px}
+.fl-body .fl-sub{margin:-16px 0 8px}
+
+/* ---- radio list (replaces the tab-style switch): one option per line, name left, detail right ---- */
+.rlist{display:flex;flex-direction:column;border:1px solid var(--border-input);border-radius:16px;background:var(--bg-page);overflow:hidden}
+.rrow{display:flex;align-items:center;flex-wrap:wrap;gap:4px 12px;min-height:52px;padding:10px 16px 10px 14px;border:0;border-top:1px solid var(--border-divider);background:none;width:100%;text-align:left;font:inherit;color:var(--text-primary);cursor:pointer}
+.rrow:first-child{border-top:0}
+.rrow .rr-t{flex:1 1 auto;font-size:var(--type-body-size);font-weight:400}
+.rrow .rr-d{font-size:var(--type-body-size);color:var(--text-secondary);white-space:nowrap}
+.rrow[aria-checked=true] .rr-t{font-weight:600}
+.rrow[aria-checked=true] .rr-d{color:var(--text-primary)}
+.rrow:active{background:var(--bg-card)}
+.rrow:focus-visible{outline:3px solid var(--border-focus);outline-offset:-3px}
+
+/* tabs (two short options only), improved: 56px tall like an input, grey track, selected = solid navy with white text */
+.segc{padding:4px;gap:4px;border-radius:16px;background:var(--bg-card)}
+.segc button{min-height:48px;border-radius:12px;font-size:var(--type-label-size);font-weight:600;color:var(--text-primary)}
+.segc button[aria-checked=true]{background:var(--text-brand);color:#fff;box-shadow:none}
+/* tabs: track keeps the field shape (16px corners); the active tab inside is a full pill */
+.segc{border-radius:16px}
+.segc button{border-radius:999px}
+
+/* ---- add media, option A: one big camera action, gallery under it, PDF as a small link ---- */
+
+.cam-ic{display:grid;place-items:center;width:48px;height:48px;border-radius:50%;background:var(--bg-card);color:var(--text-brand)}
+
+/* ---- add media, refined: camera tile (icon beside label), then two equal secondary buttons ---- */
+
+.cam-ic{width:56px;height:56px;flex:none}
+
+.addrow2{display:grid;grid-template-columns:repeat(auto-fit,minmax(calc(140px * var(--ts,1)),1fr));gap:12px}
+.addrow2 .btn{padding:8px 12px;gap:8px}
+/* thumbnail while uploading: dimmed photo, percent chip, progress bar */
+
+.ph .rm{z-index:1}
+
+/* ---- add media: camera and gallery are the same tile; PDF is a separate outlined button ---- */
+.mtile{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:112px;padding:14px 10px;border:1px solid var(--border-input);border-radius:16px;background:var(--bg-page);font:inherit;font-size:var(--type-label-size);font-weight:600;line-height:1.3;color:var(--text-primary);text-align:center;text-wrap:balance;cursor:pointer}
+.mtile:active{background:var(--bg-card)}
+.mtile:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.mtile .cam-ic{width:48px;height:48px}
+/* photo tiles = design-system PhotoUploader: 112px min, 12px corners, 12px gap */
+.pgrid{grid-template-columns:repeat(auto-fill,minmax(calc(112px * var(--ts,1)),1fr));gap:12px}
+/* uploading state = design-system PhotoUploader: white bar along the bottom, thin track, percentage */
+.ph-bar{position:absolute;left:0;right:0;bottom:0;display:flex;align-items:center;gap:8px;padding:8px;background:var(--bg-page);color:var(--text-primary)}
+.ph-track{flex:1;height:4px;border-radius:999px;background:var(--progress-track);overflow:hidden}
+.ph-track i{display:block;height:100%;border-radius:999px;background:var(--action-primary)}
+.ph-pct{font-size:var(--type-small-size);font-weight:600;line-height:1.3;font-variant-numeric:tabular-nums}
+.ph.uploading{box-shadow:inset 0 0 0 1px var(--border-divider)}
+
+/* add media: TWO options only (photos/video | PDF), compact tiles; smaller photo thumbnails (3 across) */
+.mtile{min-height:96px;gap:8px;padding:12px 8px;text-wrap:balance}
+.mtile .cam-ic{width:40px;height:40px}
+.pgrid{grid-template-columns:repeat(auto-fill,minmax(calc(88px * var(--ts,1)),1fr));gap:12px}
+.ph-bar{gap:6px;padding:6px 8px}
+
+/* ---- building screen v2: no picture; title sits where the other flow titles sit; honest time line; quiet cancel ---- */
+.fl-build{padding-top:82px;gap:24px}
+.fl-build .fl-q{margin-bottom:0}
+.bwait{display:flex;flex-direction:column;gap:12px}
+.fl-build .checks{gap:16px}
+.foot-note{margin:0 0 4px;text-align:center;font-size:var(--type-body-size);line-height:1.4;color:var(--text-secondary)}
+.btn-text.quiet{align-self:center;color:var(--text-secondary)}
+.fl-build > p.t-sec{text-wrap:balance}
+.foot-note{margin-bottom:8px}
+
+/* ================= screens 9-11, rebuilt on the same rules ================= */
+/* heading + one line under it (8 apart), then 24 to the first block */
+.es-head{display:flex;flex-direction:column;gap:8px;margin-bottom:8px}
+.es-head .fl-q{margin:0}
+.es-head .t-sec{line-height:1.4;text-wrap:pretty}
+/* the price: the one big number, then what the pro receives */
+.es-hero{display:flex;flex-direction:column;align-items:flex-start}
+.es-k{font-size:var(--type-small-size);font-weight:400;color:var(--text-secondary)}
+.es-hero .t-display{line-height:1.15;margin:2px 0 8px}
+.es-recv{display:flex;flex-direction:column;gap:0}
+.es-recv b{font-size:var(--type-label-size);font-weight:600;color:var(--text-success);font-variant-numeric:tabular-nums}
+.es-recv span{font-size:var(--type-small-size);color:var(--text-secondary)}
+/* section head with a link on the right */
+.es-sec{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:28px}
+.es-edit{min-height:48px;margin:-10px -8px -10px 0;padding:0 8px}
+/* estimate lines = design-system "Estimate (read)": Labor / Materials groups, quantity x rate on every line */
+.es-card{display:flex;flex-direction:column;padding:4px 16px;border:1px solid var(--border-input);border-radius:16px;background:var(--bg-page)}
+
+.es-line{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:baseline;gap:4px 12px;padding:12px 0;border-bottom:1px solid var(--border-divider)}
+.es-line:last-child{border-bottom:0}
+.es-l{flex:1 1 60%;min-width:0;display:flex;flex-direction:column}
+.es-l b{font-size:var(--type-label-size);font-weight:600;color:var(--text-primary)}
+.es-l .t-sec{line-height:1.4}
+.es-amt{margin-left:auto;font-size:var(--type-label-size);font-weight:600;color:var(--text-primary);white-space:nowrap;font-variant-numeric:tabular-nums}
+.es .help{margin-top:4px}
+/* numbered steps: quiet grey circles (blue is kept for the main button, links, progress, selected radio) */
+.steps-list .n{background:var(--bg-card);color:var(--text-primary)}
+/* customer rows in the radio list: name + phone */
+.rrow.two{min-height:64px;flex-wrap:nowrap}
+.rrow.two .rr-t{display:flex;flex-direction:column;gap:0;min-width:0}
+.rrow.two .rr-t b{font-size:var(--type-label-size);font-weight:400;color:var(--text-primary)}
+.rrow.two[aria-checked=true] .rr-t b{font-weight:600}
+.rrow.two .t-sec{line-height:1.4;font-variant-numeric:tabular-nums}
+/* sent */
+.sent{padding-top:4px;gap:16px}
+.done-ic{width:56px;height:56px}
+.sent .es-head{margin-bottom:8px}
+.sent-card .es-line{padding:12px 0}
+.sent .steps-list{gap:12px}
+.es-edit{min-width:48px;padding:0 8px;justify-content:flex-end}
+
+/* ---- review fixes (section A) ---- */
+
+.empty .btn-text{margin-top:4px}
+.empty .t-sec{max-width:none}
+.empty b{text-wrap:balance}
+.lt-head{flex-wrap:wrap;row-gap:4px}
+.es-edit{gap:4px}
+.ty4 .btn:disabled{background:var(--action-disabled);color:var(--text-disabled)}
+/* header pill fits beside the title (14/600, the small size); wraps only at large text */
+.ty4 .hd-new{font-size:var(--type-small-size);font-weight:600;padding:0 14px 0 10px;gap:4px}
+/* empty home fits without scrolling */
+.empty{padding:16px 16px 0;gap:4px}
+.empty-ic{width:56px;height:56px;margin-bottom:8px}
+.empty .btn-text{margin-top:0}
+
+/* ================= polish pass: consistency + card colours ================= */
+/* search: one shape and height everywhere (16px corners, 48 tall); filter button matches */
+.us-field2,.usearch2 .us-field2{border-radius:16px;min-height:48px}
+.usearch2{align-items:center}
+.us-filter2,.usearch2 .us-filter2{width:48px;height:48px}
+/* role screen: equal cards; 8 under the title, 24 before the cards */
+.role-row{min-height:124px}
+.role-h + .t-sec{margin-top:-4px}
+.roles{margin-top:12px}
+/* every button is 56 tall */
+.sc-btn{min-height:56px}
+/* the key item on a screen sits in a navy card (home start card, next job, and now the estimate total) */
+.es-hero{padding:16px;border-radius:16px;background:var(--bg-inverse);color:var(--text-on-color);align-items:stretch}
+.es-hero .es-k{color:var(--text-on-color);font-weight:600}
+.es-hero .t-display{color:var(--text-on-color);margin:2px 0 12px}
+.es-recv{flex-direction:row;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:4px 12px;padding-top:12px;border-top:1px solid rgba(255,255,255,.22)}
+.er-l{display:flex;flex-direction:column;min-width:0}
+.es-recv .er-l b{font-size:var(--type-label-size);font-weight:600;color:var(--text-on-color)}
+.es-recv .er-l span{font-size:var(--type-small-size);color:var(--text-on-color)}
+.es-recv .er-v{font-size:var(--type-title-size);font-weight:600;color:var(--text-on-color);font-variant-numeric:tabular-nums;white-space:nowrap}
+/* the one heads-up the pro must not miss uses the design-system attention style (soft amber) */
+.note.warn{padding:16px;border-radius:16px}
+
+/* ---- simplify pass (feedback: too much on screen): layout after removing text ---- */
+.role-h{margin-bottom:8px}
+.role-row .rt .t-sec{white-space:nowrap}
+.jlist-l > .startcard{margin-top:4px}
+.sc-text{padding-bottom:16px}
+.jlist-l > .empty{padding-top:40px}
+.fl-build .checks{margin-top:4px}
+.role-row .rt .t-sec{white-space:normal}
+
+/* ---- final review ---- */
+/* Log in: the whole screen scrolls as one piece, so at large text the footer never covers the main button */
+.screen.scroll-all{overflow-y:auto;scrollbar-width:none}
+.screen.scroll-all::-webkit-scrollbar{display:none}
+.scroll-all > .body{flex:0 0 auto;overflow:visible}
+.scroll-all > .foot{margin-top:auto;padding-top:24px}
+.scroll-all > .statusbar,.scroll-all > .nav,.scroll-all > .home-ind{flex:none}
+/* Role: at large text the picture gives room to the words */
+.role-img{width:calc(112px / max(var(--ts,1),1))}
+
+/* ---- AI question screen: counter on the right of the back button ---- */
+.fl-nav{justify-content:space-between}
+.fl-step{font-size:var(--type-small-size);font-weight:600;color:var(--text-secondary);white-space:nowrap}
+
+/* ================= outside review, applied ================= */
+/* 1 · Log in: brand */
+.brand-row{display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.brand-row img{width:44px;height:44px;border-radius:12px;display:block;flex:none}
+.brand-row b{font-size:var(--type-title-size);font-weight:600;color:var(--text-brand);letter-spacing:var(--type-title-tracking)}
+.link-u{color:var(--text-secondary)}
+/* 2 · Role: two big boxes */
+.roles.big{gap:16px;margin-top:12px}
+.rolecard{display:flex;flex-direction:column;width:100%;padding:0;border:1px solid var(--border-input);border-radius:16px;overflow:hidden;background:var(--bg-page);text-align:left;font:inherit;color:inherit;cursor:pointer}
+.rolecard:active{background:var(--bg-card)}
+.rolecard:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.rc-img{display:flex;justify-content:center;align-items:flex-end;height:132px;background:var(--bg-card)}
+.rc-img img{height:120px;width:auto;display:block}
+.rc-t{display:flex;flex-direction:column;gap:2px;padding:14px 16px 16px}
+.ty4 .rc-t b{font-size:var(--type-h3-size);line-height:var(--type-h3-lh);letter-spacing:var(--type-h3-tracking);font-weight:600;color:var(--text-primary)}
+.rc-t .t-sec{line-height:1.4}
+/* 3 · Home, empty: the area the jobs come from */
+.areapill{display:inline-flex;align-items:center;gap:6px;min-height:48px;margin-top:12px;padding:0 14px 0 14px;border-radius:999px;border:1px solid var(--border-input);background:var(--bg-page);font:inherit;font-size:var(--type-label-size);font-weight:600;color:var(--text-brand);cursor:pointer}
+.areapill [data-i]{display:inline-flex}
+.areapill:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+/* 4 · Home with jobs */
+.usearch2{flex-wrap:wrap}
+.usearch2 .us-field2{flex:1 1 150px}
+.usearch2 .us-filter2.labelled{width:auto;height:48px;padding:0 16px 0 12px;border-radius:999px;display:inline-flex;align-items:center;gap:6px;font:inherit;font-size:var(--type-label-size);font-weight:600;color:var(--text-brand)}
+.ty4 .nj-when,.ty4 .nj-go{font-size:var(--type-label-size)}
+.jl{padding:12px;border:1px solid var(--border-input);border-radius:16px;align-items:center}
+.jl + .jl{margin-top:12px}
+.jlist-l > .sec-row + .jl{padding-top:12px;margin-top:14px}
+.jl-body{border-bottom:0;padding-bottom:0}
+.jl:last-child .jl-body{border-bottom:0}
+.jl-ph{width:calc(104px * min(var(--ts,1),1.5))}
+.jl-ph img{height:calc(104px * min(var(--ts,1),1.5))}
+.jl-bdg{gap:4px;padding:1px 6px}
+.jl-bdg svg{flex:none}
+/* 6 · choices: bigger rows, and the chosen row is filled as well as ticked */
+.rrow{min-height:60px}
+.rrow[aria-checked=true]{background:var(--bg-card)}
+/* 9 · Building */
+.bld{align-items:center;gap:24px;padding-top:24px}
+.bld-ring{position:relative;width:132px;height:132px;display:grid;place-items:center;flex:none}
+.bld-ring img{width:84px;height:84px;border-radius:50%;display:block}
+.bld-arc{position:absolute;inset:0;border-radius:50%;border:6px solid var(--progress-track);border-top-color:var(--progress-fill);animation:bldspin 1.2s linear infinite}
+@keyframes bldspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.bld-arc{animation:none}}
+.bld-head{display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center}
+.bld-head .fl-q{margin:0}
+.bld .checks{align-self:center;gap:16px}
+/* 10 · Your estimate */
+.es-rows{display:flex;flex-direction:column;gap:8px;padding-top:12px;border-top:1px solid rgba(255,255,255,.22)}
+.es-row{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:4px 12px;font-size:var(--type-body-size);color:var(--text-on-color);font-variant-numeric:tabular-nums}
+.es-row.strong{font-weight:600}
+.es-row.strong b{font-size:var(--type-title-size);font-weight:600;white-space:nowrap}
+.note{flex-wrap:wrap}
+.note > div{flex:1 1 180px}
+.note-act{flex:none;align-self:center;min-height:48px;padding:0 4px;margin:-8px 0}
+.ty4 .es-editp{width:auto;min-height:48px;padding:0 16px 0 12px;border-radius:999px;gap:6px;margin:-10px 0}
+/* 12 · Sent */
+button.sent-card{width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer}
+button.sent-card:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+.sent-card .es-line{align-items:center;flex-wrap:nowrap}
+.sent-chev{display:inline-flex;flex:none;color:var(--text-brand)}
+.note-act{color:var(--text-primary);text-decoration:underline;text-underline-offset:3px}
+.sent-card .es-line{flex-wrap:wrap}
+.sent-card .es-l{flex:1 1 150px}
+
+.jl-ph{width:calc(110px * min(var(--ts,1),1.5))}
+.jl-ph img{height:calc(110px * min(var(--ts,1),1.5))}
+.note > div{flex:1 1 auto;display:block}
+.note-act{display:flex;justify-content:flex-start;align-self:auto;margin:0 0 -12px;padding:0;min-width:48px}
+.sent-card .es-line{flex-wrap:nowrap}
+.sent-card .es-l{flex:1 1 auto;gap:2px}
+.sent-amt{font-size:var(--type-title-size);font-weight:600;color:var(--text-brand);font-variant-numeric:tabular-nums}
+.ty4 .es-editp{margin:0}
+
+/* quick picks: the row fades out at the right edge, so the half-shown pill reads as "more this way", not as a cut-off label */
+.qchips{-webkit-mask-image:linear-gradient(to right,#000 calc(100% - 56px),transparent);mask-image:linear-gradient(to right,#000 calc(100% - 56px),transparent)}
+.foot-note{text-wrap:balance}
+
+/* role cards: arrow at the right of the text */
+.rc-row{display:flex;align-items:center;gap:12px;padding-right:14px}
+.rc-row .rc-t{flex:1;min-width:0}
+.rc-chev{display:inline-flex;flex:none;color:var(--text-brand)}
+.rc-row{gap:4px;padding-right:10px}.rc-row .rc-t{padding-right:0}
+
+/* home: floating "New estimate" button above the tab bar (replaces the header button) */
+.screen{position:relative}
+.fab{position:absolute;right:20px;bottom:108px;z-index:5;display:inline-flex;align-items:center;gap:8px;min-height:56px;padding:0 20px 0 16px;border:0;border-radius:999px;
+  background:var(--action-primary);color:var(--on-action,#fff);font:inherit;font-size:var(--type-label-size);font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(20,33,61,.28)}
+.fab:active{background:var(--action-primary-pressed)}
+.fab:focus-visible{outline:3px solid var(--border-focus);outline-offset:3px}
+.fab [data-i],.fab svg{display:inline-flex}
+.jlist-l{padding-bottom:96px}
+
+/* round floating plus (covers far less of the list than a labelled pill) */
+.fab{width:60px;height:60px;min-height:0;padding:0;justify-content:center;border-radius:50%;right:20px;bottom:106px}
+
+/* What's the job?: four add boxes under the description (no previews) */
+.aboxes{display:grid;grid-template-columns:repeat(auto-fit,minmax(calc(70px * var(--ts,1)),1fr));gap:12px}
+.abox{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;min-height:76px;padding:10px 2px;border:1px solid var(--border-input);border-radius:16px;background:var(--bg-page);
+  font:inherit;font-size:var(--type-small-size);font-weight:600;color:var(--text-primary);cursor:pointer}
+.abox [data-i]{display:inline-flex;color:var(--text-brand)}
+.abox:active{background:var(--bg-card)}
+.abox:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+
+/* ---- AI question screen: emoji, big question, one card per answer ---- */
+.qbody{gap:12px}
+.q-emoji{display:grid;place-items:center;width:72px;height:72px;border-radius:50%;background:var(--bg-card);font-size:38px;line-height:1;flex:none;
+  font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif}
+.qbody .fl-q{margin:4px 0 12px;text-wrap:balance}
+.qcards{display:flex;flex-direction:column;gap:10px}
+.qcard{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;padding:10px 16px;border:1px solid var(--border-input);border-radius:16px;background:var(--bg-page);
+  text-align:left;font:inherit;color:var(--text-primary);cursor:pointer}
+.qc-t{font-size:var(--type-title-size);font-weight:600;line-height:1.3}
+.qcard[aria-checked=true]{border:2px solid var(--border-selected);padding:9px 15px;background:var(--bg-card)}
+.qcard[aria-checked=true] .qc-t{font-weight:600}
+.qcard:active{background:var(--bg-card)}
+.qcard:focus-visible{outline:3px solid var(--border-focus);outline-offset:2px}
+
+/* AI question: the emoji sits on the same line as the question, at the same size, aligned with its first line */
+.q-title{display:flex;align-items:flex-start;gap:10px}
+.q-title > span:last-child{flex:1;min-width:0}
+.q-emoji{display:block;width:auto;height:auto;border-radius:0;background:none;font-size:1em;line-height:inherit;flex:none}
+.qbody .fl-q{margin:0 0 12px}
+
+/* Speak button: a soft filled pill with the mic in a navy circle (was an outlined pill inside an outlined box) */
+.speak{gap:10px;min-height:48px;padding:0 18px 0 8px;border:0;border-radius:999px;background:var(--bg-card);color:var(--text-brand);font-size:var(--type-label-size);font-weight:600}
+.speak-ic{display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--text-brand);color:#fff;flex:none}
+.speak-ic svg{display:block}
+.speak:active{background:var(--border-divider)}
+
+/* AI question: emoji flows with the text; the title uses the full width and the second line starts under the emoji */
+.q-title{display:block}
+.qbody .q-title{text-wrap:wrap}
+.q-emoji{display:inline;margin-right:10px}
+
+/* ---- after the +2px change: three things the larger text exposed ---- */
+/* estimate note: icon and text stay side by side */
+.note{flex-wrap:nowrap}
+.note > div{flex:1 1 0;min-width:0}
+/* role cards: same height even when one description takes two lines */
+.roles.big{display:grid;grid-auto-rows:1fr}
+.rolecard{height:100%}
+/* floating button: 56px with a 16px margin, so it clears the longest price on the card behind it */
+.fab{width:56px;height:56px;right:16px;bottom:104px}
+.rolecard .rc-row{flex:1}
+
+/* headings are bold (700): screen titles and section headings. Everything else stays semibold (600) or regular (400). */
+.m.ty4 .t-h1,.m.ty4 .sec-t,.m.ty4 .t-title{font-weight:700}
+.rc-img{height:124px}.rc-img img{height:114px}
+
+/* ================= spacing pass (one rule on every screen) =================
+   20 side margins · 24 after a title · 16 between blocks · 12 between cards and between stacked buttons · 8 label to control · 16 inside cards */
+.roles.big{gap:12px}                                   /* cards 12 apart (was 16) */
+.qcards{gap:12px}                                      /* answer cards 12 apart (was 10) */
+.jl{gap:12px}                                          /* photo to text 12 (was 14) */
+.lt-head + .body.jlist-l{padding-top:10px}             /* empty home: card starts 16 under the title, like the search bar on the jobs home (was 22) */
+.sec-row{margin-top:24px}                              /* section heading: 24 above (was 28) */
+.jlist-l > .sec-row + .jl{margin-top:12px}             /* ... and 12 below (was 14) */
+.fab{bottom:107px}                                     /* floating button 16 above the tab bar (was 13) */
+.fl-text{padding-bottom:12px}                          /* Speak button sits 12 from the bottom and right edges of the box (was 9 and 17) */
+.fl-text .speak{margin-right:-5px}
+.fl-foot{gap:12px}                                     /* two buttons in a footer are 12 apart (was 6) */
+.fl-body.es{padding-top:24px}                          /* estimate title starts at the same height as the role and sent titles (was 8 higher) */
+.es .help{margin-top:0}                                /* note under the breakdown card 8 below it (was 12) */
+.m .foot-note{margin:0 0 8px}                          /* building screen note clears the home bar */
+.jlist-l > .startcard{margin-top:0}
